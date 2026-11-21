@@ -1,0 +1,120 @@
+
+Los pollitos dicen 
+pio pio pio
+Cuando tienen hambre
+Cuando tienen frío
+
+La gallina busca
+el maíz y el trigo
+Les da la comida 
+y les presta abrigo
+
+Bajo sus dos alas
+acurrucaditos
+duermen los pollitos
+hasta el otro día
+
+Cuando se levantan 
+dicen mamacita
+tengo mucha hambre
+dame lombricitas
+
+
+
+Los tos-lli-po cen-di
+opi opi opi
+do-cuan nen-tie bre-ham
+do-cuan nen-tie o-fri
+
+La na-lli-ga ca-bus
+el iz-ma 
+y el go-tri
+Les da la da-mi-co
+y les ta-pres go-bri-a
+
+jo-ba sus dos las-a
+tos-di-ca-rru-cu-a
+men-duer los tos-lli-po
+ta-has el tro-o dia
+
+do-cuan se tan-van-le
+cen-di ta-ci-ma-ma
+go-ten cha-mu bre-ham
+me-da tas-ci-bri-lom
+
+
+
+Los tosllipo cendi
+opi opi opi
+docuan nentie breham
+docuan nentie ofri
+
+La nalliga cabus
+el izma 
+y el gotri
+Les da la damico
+y les tapres gobria
+
+joba sus dos lasa
+tosdicarrucua
+menduer los tosllipo
+tahas el troo dia
+
+docuan se tanvanle
+cendi tacimama
+goten chamu breham
+meda tascibrilom
+
+
+NRO	ORIGINAL	REVERSO
+1	Los	Los
+2	pollitos	tos-lli-po
+3	dicen	cen-di
+4	pio	opi
+5	pio	opi
+6	pio	opi
+7	Cuando	do-cuan
+8	tienen	nen-tie
+9	hambre	bre-ham
+10	Cuando	do-cuan
+11	tienen	nen-tie
+12	frío	o-fri
+13	La	La
+14	gallina	na-lli-ga
+15	busca	ca-bus
+16	el	el
+17	maíz	iz-ma
+18	y	y
+19	el	el
+20	trigo	go-tri
+21	Les	Les
+22	da	da
+23	la	la
+24	comida	da-co-mi
+25	y	y
+26	les	les
+27	presta	ta-pres
+28	abrigo	go-bri-a
+29	Bajo	jo-ba
+30	sus	sus
+31	dos	dos
+32	alas	las-a
+33	acurrucaditos	tos-di-ca-rru-cu-a
+34	duermen	men-due-r
+35	los	los
+36	pollitos	tos-lli-po
+37	hasta	ta-has
+38	el	el
+39	otro	tro-o
+40	día	dia
+41	Cuando	do-cuan
+42	se	se
+43	levantan	tan-levan
+44	dicen	cen-di
+45	mamacita	ta-ci-ma-ma
+46	tengo	go-ten
+47	mucha	cha-mu
+48	hambre	bre-ham
+49	dame	me-da
+50	lombricitas	tas-ci-bor-lom
+

@@ -1,0 +1,1772 @@
+
+---------- ORDEN / CORREGIR IDIOMAS 
+
+-- PARA EL TITULO
+%artist% - %title% - %year% - %album%
+2 Boys - I Wont Let You Down - 1992 - I Wont Let You Down
+
+%title% (titulo español)
+(V#)
+(idioma)(nombre en el idioma)
+(Ft)
+(Live Ubicacion)
+(Rem #year) ó (New #year)
+(Guitar)(Piano)(Acoustic) 
+(Remix)(DiscoMix)(Original)
+(Cv)
+
+
+Espanol Ingles Italiano Aleman Portugues Frances
+(Es)    (En)   (It)     (De)   (Pt)      (Fr)
+
+----- REEMPLAZAR
+
+https://community.mp3tag.de/t/how-to-use-the-the-replace-function-within-tags/13970
+
+$replace(%title%,'En Vivo','Live')
+$replace(%title%,'[','(')
+$replace(%title%,']',')')
+
+--reemplazar punto en titulo
+$replace(%title%,.,)
+
+buscar en filtro cuando el nombre de archivo tiene mas de un carecter (
+"$len($regexp(%_filename%,'[^)]',))" IS 2
+"$len($regexp(%_filename%,'[^-]',))" IS 0
+"$len($regexp(%_filename%,'[^)]',))" GREATER 0
+
+"$len($regexp(%title%,'[^(]',))" GREATER 1
+"$len($regexp(%title%,'[^)]',))" GREATER 1
+
+"$len($regexp(%title%,'[^1]',))" IS 1
+"$len($regexp(%title%,'[^-]',))" GREATER 0
+
+-- buscar si tiene longitud o datos 
+"$len(%unsyncedlyrics%)" GREATER 0
+"$len(%unsyncedlyrics%)" IS 0
+"$len(%description%)" GREATER 0
+"$len(%ARTISTS%)" GREATER 0
+
+
+"$meta_sep(ARTIST,\\)" HAS \\
+"$meta_sep(Artist,\\)" HAS \\
+
+NOT album IS 0
+album MATCHES "Live"
+year MATCHES "0000"
+%genre% IS "Vallenato"
+%title% MATCHES " and "
+%artist% MATCHES " and "	
+year MATCHES "0000"
+album IS "Live"
+
+"$len($regexp(%title%,'[^-]',))" GREATER 0
+"$len($regexp(%title%,'[^)]',))" GREATER 0
+"$len($regexp(%title%,'[^1]',))" IS 1
+"$len($regexp(%title%,'[^)]',))" IS 2
+"$len($regexp(%title%,'[^(]',))" IS 2
+"$len($regexp(%title%,'[^&]',))" IS 2
+
+"$len($regexp(%_filename%,'[^-]',))" GREATER 2
+"$len($regexp(%_filename%,'[^)]',))" GREATER 2
+"$len($regexp(%_filename%,'[^(]',))" GREATER 2
+
+%title% MATCHES " con "
+%title% MATCHES "remastered"
+%title% MATCHES "Espanol"
+
+%_filename% HAS italia
+
+%unsyncedlyrics% MISSING
+
+$upper(%artist%)
+
+discogs genre style
+
+pista con M (MALA) mejor audio tiene salto
+quitar (X)
+las / la / el / los / The
+
+%_filename% MATCHES "Versi"
+%_filename% MATCHES ") ("
+%_filename% MATCHES "\(V3"
+%_filename% MATCHES "  "
+%_filename% MATCHES "&"
+%_filename% MATCHES "Nuevo"
+%album% MATCHES "vol"
+%album% MATCHES "cd"
+%album% MATCHES "vivo"
+%album% MATCHES "mejor"
+# en titulos
+%_filename% MATCHES "Remas"
+%_filename% MATCHES "feat"
+%_filename% MATCHES "with"
+%_filename% MATCHES " con "
+(v
+guitarra
+piano
+
+$trim(%artist%)
+$num($trim(%year%),4)
+$trim(%album%)
+$trim(%title%)
+$trim($caps($lower(%genre%)))
+$trim(%comment%)
+Borrar comentario
+Borrar interprete del album
+Borrar compositor
+Borrar numero de disco
+Borrar caratula
+Case sensitive
+$if($len(%year%)>0,%year%,'0000')
+$if($len(%album%)>0,%album%,'0')
+
+-- FILE_NAME
+%artist% - %year% - %album% - %title%
+
+-- TITLE
+%artist% - %title% - %year%
+
+-- COMMENTS
+%_filename%
+
+-- ORDER BY 
+%artist%%year%%title%
+
+
+$len($regexp(%_filename%,'[^-]',))
+
+$cutLeft(%_filename%,$add($strrchr(%_filename%,-),1))
+
+
+nParent( $len($regexp(%_filename%,'[^(]',)) 
+nParent) $len($regexp(%_filename%,'[^)]',))
+nParent() $sub( $len($regexp(%_filename%,'[^(]',)),$len($regexp(%_filename%,'[^)]',)))
+
+nTitle_Artist $cutLeft(%_filename%,$add($strrchr(%_filename%,-),1)) - $Left(%_filename%, $add($strstr(%_filename%,-),-2))
+nTitulo $cutLeft(%_filename%,$add($strrchr(%_filename%,-),1))
+nArtisTitle %artist% %title%
+nFind01(Name $strchr(%_filename%,'(')
+n#GuionFileNameName $len($regexp(%_filename%,'[^-]',))
+nArtistTitleData %artist% %title% lyrics
+
+nLongTitleName $len(%title%)
+
+nLongAlbumName $len(%album%)
+
+nFind02)Name $strchr(%_filename%,')')
+
+n#GuionTitleName $len($regexp(%title%,'[^-]',))
+
+nUnsyncedlyrics %unsyncedlyrics%
+
+
+nCaracterEspecialesName $add($add($add($ifgreater($strstr(%comment%,'!'),0,1,0),$ifgreater($strstr(%comment%,'#'),0,1,0),$ifgreater($strstr(%comment%,'$'),0,1,0),$ifgreater($strstr(%comment%,'%'),0,1,0),$ifgreater($strstr(%comment%,'&'),0,1,0)),$add($ifgreater($strstr(%comment%,'*'),0,1,0),$ifgreater($strstr(%comment%,'+'),0,1,0),$ifgreater($strstr(%comment%,','),0,1,0),$ifgreater($strstr(%comment%,'.'),0,1,0),$ifgreater($strstr(%comment%,'/'),0,1,0)),$add($ifgreater($strstr(%comment%,':'),0,1,0),$ifgreater($strstr(%comment%,';'),0,1,0),$ifgreater($strstr(%comment%,'<'),0,1,0),$ifgreater($strstr(%comment%,'='),0,1,0),$ifgreater($strstr(%comment%,'>'),0,1,0)),$add($ifgreater($strstr(%comment%,'?'),0,1,0),$ifgreater($strstr(%comment%,'@'),0,1,0),$ifgreater($strstr(%comment%,'['),0,1,0),$ifgreater($strstr(%comment%,'\'),0,1,0),$ifgreater($strstr(%comment%,']'),0,1,0)),$add($ifgreater($strstr(%comment%,'^'),0,1,0),$ifgreater($strstr(%comment%,'_'),0,1,0),$ifgreater($strstr(%comment%,'`'),0,1,0),$ifgreater($strstr(%comment%,'{'),0,1,0),$ifgreater($strstr(%comment%,'|'),0,1,0)),$add($ifgreater($strstr(%comment%,'}'),0,1,0),$ifgreater($strstr(%comment%,'~'),0,1,0))),$add($add($ifgreater($strstr(%comment%,'Ç'),0,1,0),$ifgreater($strstr(%comment%,'ü'),0,1,0),$ifgreater($strstr(%comment%,'é'),0,1,0),$ifgreater($strstr(%comment%,'â'),0,1,0),$ifgreater($strstr(%comment%,'ä'),0,1,0)),$add($ifgreater($strstr(%comment%,'à'),0,1,0),$ifgreater($strstr(%comment%,'å'),0,1,0),$ifgreater($strstr(%comment%,'ç'),0,1,0),$ifgreater($strstr(%comment%,'ê'),0,1,0),$ifgreater($strstr(%comment%,'ë'),0,1,0)),$add($ifgreater($strstr(%comment%,'è'),0,1,0),$ifgreater($strstr(%comment%,'ï'),0,1,0),$ifgreater($strstr(%comment%,'î'),0,1,0),$ifgreater($strstr(%comment%,'ì'),0,1,0),$ifgreater($strstr(%comment%,'Ä'),0,1,0)),$add($ifgreater($strstr(%comment%,'Å'),0,1,0),$ifgreater($strstr(%comment%,'É'),0,1,0),$ifgreater($strstr(%comment%,'æ'),0,1,0),$ifgreater($strstr(%comment%,'Æ'),0,1,0),$ifgreater($strstr(%comment%,'ô'),0,1,0)),$add($ifgreater($strstr(%comment%,'ö'),0,1,0),$ifgreater($strstr(%comment%,'ò'),0,1,0),$ifgreater($strstr(%comment%,'û'),0,1,0),$ifgreater($strstr(%comment%,'ù'),0,1,0),$ifgreater($strstr(%comment%,'ÿ'),0,1,0)),$add($ifgreater($strstr(%comment%,'Ö'),0,1,0),$ifgreater($strstr(%comment%,'Ü'),0,1,0),$ifgreater($strstr(%comment%,'¢'),0,1,0),$ifgreater($strstr(%comment%,'£'),0,1,0),$ifgreater($strstr(%comment%,'¥'),0,1,0)),$add($ifgreater($strstr(%comment%,'₧'),0,1,0),$ifgreater($strstr(%comment%,'ƒ'),0,1,0),$ifgreater($strstr(%comment%,'á'),0,1,0),$ifgreater($strstr(%comment%,'í'),0,1,0),$ifgreater($strstr(%comment%,'ó'),0,1,0)),$add($ifgreater($strstr(%comment%,'ú'),0,1,0),$ifgreater($strstr(%comment%,'ñ'),0,1,0),$ifgreater($strstr(%comment%,'Ñ'),0,1,0),$ifgreater($strstr(%comment%,'ª'),0,1,0),$ifgreater($strstr(%comment%,'º'),0,1,0)),$add($ifgreater($strstr(%comment%,'¿'),0,1,0),$ifgreater($strstr(%comment%,'⌐'),0,1,0),$ifgreater($strstr(%comment%,'¬'),0,1,0),$ifgreater($strstr(%comment%,'½'),0,1,0),$ifgreater($strstr(%comment%,'¼'),0,1,0)),$add($ifgreater($strstr(%comment%,'¡'),0,1,0),$ifgreater($strstr(%comment%,'«'),0,1,0),$ifgreater($strstr(%comment%,'»'),0,1,0))),$add($add($ifgreater($strstr(%comment%,'α'),0,1,0),$ifgreater($strstr(%comment%,'ß'),0,1,0),$ifgreater($strstr(%comment%,'Γ'),0,1,0),$ifgreater($strstr(%comment%,'π'),0,1,0),$ifgreater($strstr(%comment%,'Σ'),0,1,0)),$add($ifgreater($strstr(%comment%,'σ'),0,1,0),$ifgreater($strstr(%comment%,'µ'),0,1,0),$ifgreater($strstr(%comment%,'τ'),0,1,0),$ifgreater($strstr(%comment%,'Φ'),0,1,0),$ifgreater($strstr(%comment%,'Θ'),0,1,0)),$add($ifgreater($strstr(%comment%,'Ω'),0,1,0),$ifgreater($strstr(%comment%,'δ'),0,1,0),$ifgreater($strstr(%comment%,'∞'),0,1,0),$ifgreater($strstr(%comment%,'φ'),0,1,0),$ifgreater($strstr(%comment%,'ε'),0,1,0)),$add($ifgreater($strstr(%comment%,'∩'),0,1,0),$ifgreater($strstr(%comment%,'≡'),0,1,0),$ifgreater($strstr(%comment%,'±'),0,1,0),$ifgreater($strstr(%comment%,'≥'),0,1,0),$ifgreater($strstr(%comment%,'≤'),0,1,0)),$add($ifgreater($strstr(%comment%,'⌠'),0,1,0),$ifgreater($strstr(%comment%,'⌡'),0,1,0),$ifgreater($strstr(%comment%,'÷'),0,1,0),$ifgreater($strstr(%comment%,'≈'),0,1,0),$ifgreater($strstr(%comment%,'≈'),0,1,0)),$add($ifgreater($strstr(%comment%,'∙'),0,1,0),$ifgreater($strstr(%comment%,'·'),0,1,0),$ifgreater($strstr(%comment%,'√'),0,1,0),$ifgreater($strstr(%comment%,'ⁿ'),0,1,0),$ifgreater($strstr(%comment%,'²'),0,1,0)),$add($ifgreater($strstr(%comment%,'■'),0,1,0),$ifgreater($strstr(%comment%,' '),0,1,0))))
+
+nAllMappingsName
+
+%acoustid_id%-%acoustid_fingerprint%-%album%-%albumsort%-%albumartist%-%albumartistsort%-%artist%-%artistsort%-%barcode%-%bpm%-%catalognumber%-%comment%-%compilation%-%composer%-%composersort%-%conductor%-%contentgroup%-%copyright%-%date%-%description%-%discnumber%-%encodedby%-%encodersettings%-%encodingtime%-%fileowner%-%filetype%-%genre%-%grouping%-%initalkey%-%involvedpeople%-%isrc%-%language%-%length%-%lyricist%-%mediatype%-%mixartist%-%mood%-%movementname%-%movement%-%movementtotal%-%musicbrainz_albumartistid%-%musicbrainz_albumid%-%musicbrainz_albumreleasecountry%-%musicbrainz_albumstatus%-%musicbrainz_albutype%-%musicbrainz_artistid%-%musicbrainz_discid%-%musicbrainz_originalalbumid%-%musicbrainz_originalartistid%-%musicbrainz_releasegroupid%-%musicbrainz_releasetrackid%-%musicbrainz_trackid%-%musicbrainz_trmid%-%musicbrainz_workid%-%musiciancredits%-%narrator%-%netradioowner%-%netradiostation%-%origalbum%-%origartist%-%origfilename%-%origlyricist%-%origyear%-%podcast%-%podcastcategory%-%podcastdesc%-%podcastid%-%podcastkeywords%-%podcasturl%-%popularimeter%-%publisher%-%rating mm%-%rating wmp%-%releasetime%-%setsubtitle%-%subtitle%-%taggingtime%-%title%-%titlesort%-%track%-%uniquefileid%-%unsyncedlyrics%-%www%-%wwwartist%-%wwwaudiofile%-%wwwaudiosource%-%wwwcommercialinfo%-%wwwcopyright%-%wwwpayment%-%wwwpublisher%-%wwwradiopage%-%year%-%other fields%
+
+nAllInfoName
+%_bitrate%;%_codec%;%_cover_mimetype%;%_cover_size%;%_cover_type%;%_cover_height%;%_cover_width%;%_covers%;%_id3v2_character_ecoding%;%_length%;%_length_seconds%;%_mode%;%_samplerate%;%_tag%;%_tag_read%;%_tag_size%;%_tag_size_appended%;%_tag_size_prepened%;%_tool%;%_vbr%;%_directory%;%_extension%;%_filename%;%_filename_ext%;%_folderpath%;%_folderpath_rel%;%_path%;%_parent_direcory%;%_volume%;%_workingdir%;%_workingpath%;%_playlist_filename%;%_playlist_filename_ext%;%_playlist_folderpath%;%_file_create_ate%;%_file_create_datetime%;%_file_create_datetime_raw%;%_file_mod_date%;%_file_mod_datetime%;%_file_mod_datetime_raw%;%_file_ize%;%_file_size_bytes%;%_file_size_kb%;%_file_size_mb%;%_crc%;%_md5%;%_md5audio%;%_app%;%_counter%;%_date%;%_datetime%;%_max_cunter%;%_total_files%;%_total_size%;%_total_size_raw%;%_total_time%;%_total_time2%;%_total_time_raw%;
+
+lyricist
+origlyricist
+unsyncedlyrics
+
+%lyricist%
+%origlyricist%
+%unsyncedlyrics%
+
+%lyricist% MISSING
+%origlyricist% MISSING
+%unsyncedlyrics% MISSING
+
+"$left(%lyricist%,10)"
+"$left(%origlyricist%,10)"
+"$left(%unsyncedlyrics%,10)"
+
+"$replace(%lyricist%,$char(13), ,$char(10), )"
+"$replace(%origlyricist%,$char(13), ,$char(10), )"
+"$replace(%unsyncedlyrics%,$char(13), ,$char(10), )"
+
+$sub($num($len(%unsyncedlyrics%), $len(%unsyncedlyrics%) ), 10 )
+
+
+
+
+---------- ---------- BUSCAR y REEMPLAZAR Lista buscar en mp3tag  ---------- ---------- 
+
+_FILENAME
+
+wwwñÑçÇßœoeŒOExxx
+%title%-$replace(%artist%,ñ,n,Ñ,N,ç,c,Ç,C,ß,ss,œ,oe,Œ,OE,)
+G-wwwnNcCssoeoeOEOExxx.mp3
+
+yyyáÁàâäÄÉÈéèêëíÍìîïóÓòôöÖúÚüÜùûzzz
+%title%-$replace(%artist%,á,a,é,e,Á,A,à,a,â,a,ä,a,Ä,A,É,E,È,E,è,e,ê,e,ë,e,í,i,Í,I,ì,i,î,i,ï,i,ó,o,Ó,O,ò,o,ô,o,ö,o,Ö,O,ú,u,Ú,U,ü,u,Ü,U,ù,u,û,u)
+F-yyyaAaaaAEEeeeeiIiiioOoooOuUuUuuzzz.mp3
+
+aaa¿?!¡:;.bbb
+%title%-$replace(%artist%,¿,1,?,2,!,4,¡,5,:,6,;,7,.)
+A-aaa1245678bbb
+
+ccc[]&%#ddd
+%title%-$replace(%artist%,'[',1,']',2,'&',3,'%',4,'#',5,)
+B-B-ccc12345ddd.mp3
+
+eee^/\"'fff
+%title%-$replace(%artist%,^,1,'/',2,'\',3,'',4,'"',5)
+C-eee12354fff.mp3
+
+ggg¿?!¡,hhh
+%title%-$replace(%artist%,¿,1,?,2,!,3,¡,4,',',5,)
+D-ggg12345hhh.mp3
+
+– / —   Este signo es raya – / — ( es diferente al guion - ) se genera en windows con "Atl + 0151"
+iii–—jjj
+%title%-$replace(%artist%,–,1)
+E-iii1jjj.mp3
+
+kkk@+*<=>{}~lll
+%title%-$replace(%artist%,@,1,+,2,*,3,<,4,=,5,>,6,{,7,},8,~,9,)
+K-kkk123456789lll.mp3
+
+
+se excluyen: 
+-
+(
+)
+
+---------- CAMPOS DE CONFIGURACION
+
+
+nUnsyncedlyricsName
+%unsyncedlyrics%
+cUnsyncedlyricsCampo
+
+nAllMappingsName
+%acoustid_id%-%acoustid_fingerprint%-%album%-%albumsort%-%albumartist%-%albumartistsort%-%artist%-%artistsort%-%barcode%-%bpm%-%catalognumber%-%comment%-%compilation%-%composer%-%composersort%-%conductor%-%contentgroup%-%copyright%-%date%-%description%-%discnumber%-%encodedby%-%encodersettings%-%encodingtime%-%fileowner%-%filetype%-%genre%-%grouping%-%initalkey%-%involvedpeople%-%isrc%-%language%-%length%-%lyricist%-%mediatype%-%mixartist%-%mood%-%movementname%-%movement%-%movementtotal%-%musicbrainz_albumartistid%-%musicbrainz_albumid%-%musicbrainz_albumreleasecountry%-%musicbrainz_albumstatus%-%musicbrainz_albutype%-%musicbrainz_artistid%-%musicbrainz_discid%-%musicbrainz_originalalbumid%-%musicbrainz_originalartistid%-%musicbrainz_releasegroupid%-%musicbrainz_releasetrackid%-%musicbrainz_trackid%-%musicbrainz_trmid%-%musicbrainz_workid%-%musiciancredits%-%narrator%-%netradioowner%-%netradiostation%-%origalbum%-%origartist%-%origfilename%-%origlyricist%-%origyear%-%podcast%-%podcastcategory%-%podcastdesc%-%podcastid%-%podcastkeywords%-%podcasturl%-%popularimeter%-%publisher%-%rating mm%-%rating wmp%-%releasetime%-%setsubtitle%-%subtitle%-%taggingtime%-%title%-%titlesort%-%track%-%uniquefileid%-%unsyncedlyrics%-%www%-%wwwartist%-%wwwaudiofile%-%wwwaudiosource%-%wwwcommercialinfo%-%wwwcopyright%-%wwwpayment%-%wwwpublisher%-%wwwradiopage%-%year%-%other fields%
+cAllMappingsCampo
+
+nAllInfoName
+%_bitrate%;%_codec%;%_cover_mimetype%;%_cover_size%;%_cover_type%;%_cover_height%;%_cover_width%;%_covers%;%_id3v2_character_ecoding%;%_length%;%_length_seconds%;%_mode%;%_samplerate%;%_tag%;%_tag_read%;%_tag_size%;%_tag_size_appended%;%_tag_size_prepened%;%_tool%;%_vbr%;%_directory%;%_extension%;%_filename%;%_filename_ext%;%_folderpath%;%_folderpath_rel%;%_path%;%_parent_direcory%;%_volume%;%_workingdir%;%_workingpath%;%_playlist_filename%;%_playlist_filename_ext%;%_playlist_folderpath%;%_file_create_ate%;%_file_create_datetime%;%_file_create_datetime_raw%;%_file_mod_date%;%_file_mod_datetime%;%_file_mod_datetime_raw%;%_file_ize%;%_file_size_bytes%;%_file_size_kb%;%_file_size_mb%;%_crc%;%_md5%;%_md5audio%;%_app%;%_counter%;%_date%;%_datetime%;%_max_cunter%;%_total_files%;%_total_size%;%_total_size_raw%;%_total_time%;%_total_time2%;%_total_time_raw%;
+cAllInfoCampo
+
+nLongFileCampo
+$len(%_filename%)
+cLongFileCampo
+
+nLongAlbumName
+$len(%album%)
+cLongAlbumCampo
+
+nCaracterEspecialesName
+$add($add($add($ifgreater($strstr(%comment%,'!'),0,1,0),$ifgreater($strstr(%comment%,'#'),0,1,0),$ifgreater($strstr(%comment%,'$'),0,1,0),$ifgreater($strstr(%comment%,'%'),0,1,0),$ifgreater($strstr(%comment%,'&'),0,1,0)),$add($ifgreater($strstr(%comment%,'*'),0,1,0),$ifgreater($strstr(%comment%,'+'),0,1,0),$ifgreater($strstr(%comment%,','),0,1,0),$ifgreater($strstr(%comment%,'.'),0,1,0),$ifgreater($strstr(%comment%,'/'),0,1,0)),$add($ifgreater($strstr(%comment%,':'),0,1,0),$ifgreater($strstr(%comment%,';'),0,1,0),$ifgreater($strstr(%comment%,'<'),0,1,0),$ifgreater($strstr(%comment%,'='),0,1,0),$ifgreater($strstr(%comment%,'>'),0,1,0)),$add($ifgreater($strstr(%comment%,'?'),0,1,0),$ifgreater($strstr(%comment%,'@'),0,1,0),$ifgreater($strstr(%comment%,'['),0,1,0),$ifgreater($strstr(%comment%,'\'),0,1,0),$ifgreater($strstr(%comment%,']'),0,1,0)),$add($ifgreater($strstr(%comment%,'^'),0,1,0),$ifgreater($strstr(%comment%,'_'),0,1,0),$ifgreater($strstr(%comment%,'`'),0,1,0),$ifgreater($strstr(%comment%,'{'),0,1,0),$ifgreater($strstr(%comment%,'|'),0,1,0)),$add($ifgreater($strstr(%comment%,'}'),0,1,0),$ifgreater($strstr(%comment%,'~'),0,1,0))),$add($add($ifgreater($strstr(%comment%,'Ç'),0,1,0),$ifgreater($strstr(%comment%,'ü'),0,1,0),$ifgreater($strstr(%comment%,'é'),0,1,0),$ifgreater($strstr(%comment%,'â'),0,1,0),$ifgreater($strstr(%comment%,'ä'),0,1,0)),$add($ifgreater($strstr(%comment%,'à'),0,1,0),$ifgreater($strstr(%comment%,'å'),0,1,0),$ifgreater($strstr(%comment%,'ç'),0,1,0),$ifgreater($strstr(%comment%,'ê'),0,1,0),$ifgreater($strstr(%comment%,'ë'),0,1,0)),$add($ifgreater($strstr(%comment%,'è'),0,1,0),$ifgreater($strstr(%comment%,'ï'),0,1,0),$ifgreater($strstr(%comment%,'î'),0,1,0),$ifgreater($strstr(%comment%,'ì'),0,1,0),$ifgreater($strstr(%comment%,'Ä'),0,1,0)),$add($ifgreater($strstr(%comment%,'Å'),0,1,0),$ifgreater($strstr(%comment%,'É'),0,1,0),$ifgreater($strstr(%comment%,'æ'),0,1,0),$ifgreater($strstr(%comment%,'Æ'),0,1,0),$ifgreater($strstr(%comment%,'ô'),0,1,0)),$add($ifgreater($strstr(%comment%,'ö'),0,1,0),$ifgreater($strstr(%comment%,'ò'),0,1,0),$ifgreater($strstr(%comment%,'û'),0,1,0),$ifgreater($strstr(%comment%,'ù'),0,1,0),$ifgreater($strstr(%comment%,'ÿ'),0,1,0)),$add($ifgreater($strstr(%comment%,'Ö'),0,1,0),$ifgreater($strstr(%comment%,'Ü'),0,1,0),$ifgreater($strstr(%comment%,'¢'),0,1,0),$ifgreater($strstr(%comment%,'£'),0,1,0),$ifgreater($strstr(%comment%,'¥'),0,1,0)),$add($ifgreater($strstr(%comment%,'₧'),0,1,0),$ifgreater($strstr(%comment%,'ƒ'),0,1,0),$ifgreater($strstr(%comment%,'á'),0,1,0),$ifgreater($strstr(%comment%,'í'),0,1,0),$ifgreater($strstr(%comment%,'ó'),0,1,0)),$add($ifgreater($strstr(%comment%,'ú'),0,1,0),$ifgreater($strstr(%comment%,'ñ'),0,1,0),$ifgreater($strstr(%comment%,'Ñ'),0,1,0),$ifgreater($strstr(%comment%,'ª'),0,1,0),$ifgreater($strstr(%comment%,'º'),0,1,0)),$add($ifgreater($strstr(%comment%,'¿'),0,1,0),$ifgreater($strstr(%comment%,'⌐'),0,1,0),$ifgreater($strstr(%comment%,'¬'),0,1,0),$ifgreater($strstr(%comment%,'½'),0,1,0),$ifgreater($strstr(%comment%,'¼'),0,1,0)),$add($ifgreater($strstr(%comment%,'¡'),0,1,0),$ifgreater($strstr(%comment%,'«'),0,1,0),$ifgreater($strstr(%comment%,'»'),0,1,0))),$add($add($ifgreater($strstr(%comment%,'α'),0,1,0),$ifgreater($strstr(%comment%,'ß'),0,1,0),$ifgreater($strstr(%comment%,'Γ'),0,1,0),$ifgreater($strstr(%comment%,'π'),0,1,0),$ifgreater($strstr(%comment%,'Σ'),0,1,0)),$add($ifgreater($strstr(%comment%,'σ'),0,1,0),$ifgreater($strstr(%comment%,'µ'),0,1,0),$ifgreater($strstr(%comment%,'τ'),0,1,0),$ifgreater($strstr(%comment%,'Φ'),0,1,0),$ifgreater($strstr(%comment%,'Θ'),0,1,0)),$add($ifgreater($strstr(%comment%,'Ω'),0,1,0),$ifgreater($strstr(%comment%,'δ'),0,1,0),$ifgreater($strstr(%comment%,'∞'),0,1,0),$ifgreater($strstr(%comment%,'φ'),0,1,0),$ifgreater($strstr(%comment%,'ε'),0,1,0)),$add($ifgreater($strstr(%comment%,'∩'),0,1,0),$ifgreater($strstr(%comment%,'≡'),0,1,0),$ifgreater($strstr(%comment%,'±'),0,1,0),$ifgreater($strstr(%comment%,'≥'),0,1,0),$ifgreater($strstr(%comment%,'≤'),0,1,0)),$add($ifgreater($strstr(%comment%,'⌠'),0,1,0),$ifgreater($strstr(%comment%,'⌡'),0,1,0),$ifgreater($strstr(%comment%,'÷'),0,1,0),$ifgreater($strstr(%comment%,'≈'),0,1,0),$ifgreater($strstr(%comment%,'≈'),0,1,0)),$add($ifgreater($strstr(%comment%,'∙'),0,1,0),$ifgreater($strstr(%comment%,'·'),0,1,0),$ifgreater($strstr(%comment%,'√'),0,1,0),$ifgreater($strstr(%comment%,'ⁿ'),0,1,0),$ifgreater($strstr(%comment%,'²'),0,1,0)),$add($ifgreater($strstr(%comment%,'■'),0,1,0),$ifgreater($strstr(%comment%,' '),0,1,0))))
+cCaracterEspecialesCampo
+
+nFind01(Name
+$strchr(%_filename%,'(')
+cFind01(Campo
+
+nFind02)Name
+$strchr(%_filename%,')')
+cFind02)Campo
+
+nLongTitleName
+$len(%title%)
+cLongTitleCampo
+
+n#GuionFileNameName
+$len($regexp(%_filename%,'[^-]',))
+c#GuionFileNameCampo
+
+n#GuionTitleName
+$len($regexp(%title%,'[^-]',))
+c#GuionTitleCampo
+
+
+----- FILTROS
+
+
+artista@PRUEBA
+$strstr(%artist%,$char(64))
+Devuelve 8
+
+$ifgreater($strstr(%artist%,$char(64)),0,yes,no)
+
+$ifgreater($strstr(%artist%,$char(64)),0,1,0)
+
+"$ifgreater($strstr(%field%,$char(34)),0,yes,no)" IS yes or field MATCHES \"
+
+$add($add($ifgreater($strstr(%artist%,'!'),0,1,0),$ifgreater($strstr(%artist%,'#'),0,1,0),$ifgreater($strstr(%artist%,'$'),0,1,0),$ifgreater($strstr(%artist%,'%'),0,1,0),$ifgreater($strstr(%artist%,'&'),0,1,0)),$add($ifgreater($strstr(%artist%,'*'),0,1,0),$ifgreater($strstr(%artist%,'+'),0,1,0),$ifgreater($strstr(%artist%,','),0,1,0),$ifgreater($strstr(%artist%,'.'),0,1,0),$ifgreater($strstr(%artist%,'/'),0,1,0)),$add($ifgreater($strstr(%artist%,':'),0,1,0),$ifgreater($strstr(%artist%,';'),0,1,0),$ifgreater($strstr(%artist%,'<'),0,1,0),$ifgreater($strstr(%artist%,'='),0,1,0),$ifgreater($strstr(%artist%,'>'),0,1,0)),$add($ifgreater($strstr(%artist%,'?'),0,1,0),$ifgreater($strstr(%artist%,'@'),0,1,0),$ifgreater($strstr(%artist%,'['),0,1,0),$ifgreater($strstr(%artist%,'\'),0,1,0),$ifgreater($strstr(%artist%,']'),0,1,0)),$add($ifgreater($strstr(%artist%,'^'),0,1,0),$ifgreater($strstr(%artist%,'_'),0,1,0),$ifgreater($strstr(%artist%,'`'),0,1,0),$ifgreater($strstr(%artist%,'{'),0,1,0),$ifgreater($strstr(%artist%,'|'),0,1,0)),$add($ifgreater($strstr(%artist%,'}'),0,1,0),$ifgreater($strstr(%artist%,'~'),0,1,0)))
+
+!#$%&*+,./:;<=>?@[\]^_`{|}~
+27
+
+$add($add($ifgreater($strstr(%artist%,'Ç'),0,1,0),$ifgreater($strstr(%artist%,'ü'),0,1,0),$ifgreater($strstr(%artist%,'é'),0,1,0),$ifgreater($strstr(%artist%,'â'),0,1,0),$ifgreater($strstr(%artist%,'ä'),0,1,0)),$add($ifgreater($strstr(%artist%,'à'),0,1,0),$ifgreater($strstr(%artist%,'å'),0,1,0),$ifgreater($strstr(%artist%,'ç'),0,1,0),$ifgreater($strstr(%artist%,'ê'),0,1,0),$ifgreater($strstr(%artist%,'ë'),0,1,0)),$add($ifgreater($strstr(%artist%,'è'),0,1,0),$ifgreater($strstr(%artist%,'ï'),0,1,0),$ifgreater($strstr(%artist%,'î'),0,1,0),$ifgreater($strstr(%artist%,'ì'),0,1,0),$ifgreater($strstr(%artist%,'Ä'),0,1,0)),$add($ifgreater($strstr(%artist%,'Å'),0,1,0),$ifgreater($strstr(%artist%,'É'),0,1,0),$ifgreater($strstr(%artist%,'æ'),0,1,0),$ifgreater($strstr(%artist%,'Æ'),0,1,0),$ifgreater($strstr(%artist%,'ô'),0,1,0)),$add($ifgreater($strstr(%artist%,'ö'),0,1,0),$ifgreater($strstr(%artist%,'ò'),0,1,0),$ifgreater($strstr(%artist%,'û'),0,1,0),$ifgreater($strstr(%artist%,'ù'),0,1,0),$ifgreater($strstr(%artist%,'ÿ'),0,1,0)),$add($ifgreater($strstr(%artist%,'Ö'),0,1,0),$ifgreater($strstr(%artist%,'Ü'),0,1,0),$ifgreater($strstr(%artist%,'¢'),0,1,0),$ifgreater($strstr(%artist%,'£'),0,1,0),$ifgreater($strstr(%artist%,'¥'),0,1,0)),$add($ifgreater($strstr(%artist%,'₧'),0,1,0),$ifgreater($strstr(%artist%,'ƒ'),0,1,0),$ifgreater($strstr(%artist%,'á'),0,1,0),$ifgreater($strstr(%artist%,'í'),0,1,0),$ifgreater($strstr(%artist%,'ó'),0,1,0)),$add($ifgreater($strstr(%artist%,'ú'),0,1,0),$ifgreater($strstr(%artist%,'ñ'),0,1,0),$ifgreater($strstr(%artist%,'Ñ'),0,1,0),$ifgreater($strstr(%artist%,'ª'),0,1,0),$ifgreater($strstr(%artist%,'º'),0,1,0)),$add($ifgreater($strstr(%artist%,'¿'),0,1,0),$ifgreater($strstr(%artist%,'⌐'),0,1,0),$ifgreater($strstr(%artist%,'¬'),0,1,0),$ifgreater($strstr(%artist%,'½'),0,1,0),$ifgreater($strstr(%artist%,'¼'),0,1,0)),$add($ifgreater($strstr(%artist%,'¡'),0,1,0),$ifgreater($strstr(%artist%,'«'),0,1,0),$ifgreater($strstr(%artist%,'»'),0,1,0)))
+
+ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»
+48
+
+$add($add($ifgreater($strstr(%artist%,'α'),0,1,0),$ifgreater($strstr(%artist%,'ß'),0,1,0),$ifgreater($strstr(%artist%,'Γ'),0,1,0),$ifgreater($strstr(%artist%,'π'),0,1,0),$ifgreater($strstr(%artist%,'Σ'),0,1,0)),$add($ifgreater($strstr(%artist%,'σ'),0,1,0),$ifgreater($strstr(%artist%,'µ'),0,1,0),$ifgreater($strstr(%artist%,'τ'),0,1,0),$ifgreater($strstr(%artist%,'Φ'),0,1,0),$ifgreater($strstr(%artist%,'Θ'),0,1,0)),$add($ifgreater($strstr(%artist%,'Ω'),0,1,0),$ifgreater($strstr(%artist%,'δ'),0,1,0),$ifgreater($strstr(%artist%,'∞'),0,1,0),$ifgreater($strstr(%artist%,'φ'),0,1,0),$ifgreater($strstr(%artist%,'ε'),0,1,0)),$add($ifgreater($strstr(%artist%,'∩'),0,1,0),$ifgreater($strstr(%artist%,'≡'),0,1,0),$ifgreater($strstr(%artist%,'±'),0,1,0),$ifgreater($strstr(%artist%,'≥'),0,1,0),$ifgreater($strstr(%artist%,'≤'),0,1,0)),$add($ifgreater($strstr(%artist%,'⌠'),0,1,0),$ifgreater($strstr(%artist%,'⌡'),0,1,0),$ifgreater($strstr(%artist%,'÷'),0,1,0),$ifgreater($strstr(%artist%,'≈'),0,1,0),$ifgreater($strstr(%artist%,'≈'),0,1,0)),$add($ifgreater($strstr(%artist%,'∙'),0,1,0),$ifgreater($strstr(%artist%,'·'),0,1,0),$ifgreater($strstr(%artist%,'√'),0,1,0),$ifgreater($strstr(%artist%,'ⁿ'),0,1,0),$ifgreater($strstr(%artist%,'²'),0,1,0)),$add($ifgreater($strstr(%artist%,'■'),0,1,0),$ifgreater($strstr(%artist%,' '),0,1,0)))
+
+
+αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈≈∙·√ⁿ²■ 
+32
+
+$add($add($add($ifgreater($strstr(%artist%,'!'),0,1,0),$ifgreater($strstr(%artist%,'#'),0,1,0),$ifgreater($strstr(%artist%,'$'),0,1,0),$ifgreater($strstr(%artist%,'%'),0,1,0),$ifgreater($strstr(%artist%,'&'),0,1,0)),$add($ifgreater($strstr(%artist%,'*'),0,1,0),$ifgreater($strstr(%artist%,'+'),0,1,0),$ifgreater($strstr(%artist%,','),0,1,0),$ifgreater($strstr(%artist%,'.'),0,1,0),$ifgreater($strstr(%artist%,'/'),0,1,0)),$add($ifgreater($strstr(%artist%,':'),0,1,0),$ifgreater($strstr(%artist%,';'),0,1,0),$ifgreater($strstr(%artist%,'<'),0,1,0),$ifgreater($strstr(%artist%,'='),0,1,0),$ifgreater($strstr(%artist%,'>'),0,1,0)),$add($ifgreater($strstr(%artist%,'?'),0,1,0),$ifgreater($strstr(%artist%,'@'),0,1,0),$ifgreater($strstr(%artist%,'['),0,1,0),$ifgreater($strstr(%artist%,'\'),0,1,0),$ifgreater($strstr(%artist%,']'),0,1,0)),$add($ifgreater($strstr(%artist%,'^'),0,1,0),$ifgreater($strstr(%artist%,'_'),0,1,0),$ifgreater($strstr(%artist%,'`'),0,1,0),$ifgreater($strstr(%artist%,'{'),0,1,0),$ifgreater($strstr(%artist%,'|'),0,1,0)),$add($ifgreater($strstr(%artist%,'}'),0,1,0),$ifgreater($strstr(%artist%,'~'),0,1,0))),$add($add($ifgreater($strstr(%artist%,'Ç'),0,1,0),$ifgreater($strstr(%artist%,'ü'),0,1,0),$ifgreater($strstr(%artist%,'é'),0,1,0),$ifgreater($strstr(%artist%,'â'),0,1,0),$ifgreater($strstr(%artist%,'ä'),0,1,0)),$add($ifgreater($strstr(%artist%,'à'),0,1,0),$ifgreater($strstr(%artist%,'å'),0,1,0),$ifgreater($strstr(%artist%,'ç'),0,1,0),$ifgreater($strstr(%artist%,'ê'),0,1,0),$ifgreater($strstr(%artist%,'ë'),0,1,0)),$add($ifgreater($strstr(%artist%,'è'),0,1,0),$ifgreater($strstr(%artist%,'ï'),0,1,0),$ifgreater($strstr(%artist%,'î'),0,1,0),$ifgreater($strstr(%artist%,'ì'),0,1,0),$ifgreater($strstr(%artist%,'Ä'),0,1,0)),$add($ifgreater($strstr(%artist%,'Å'),0,1,0),$ifgreater($strstr(%artist%,'É'),0,1,0),$ifgreater($strstr(%artist%,'æ'),0,1,0),$ifgreater($strstr(%artist%,'Æ'),0,1,0),$ifgreater($strstr(%artist%,'ô'),0,1,0)),$add($ifgreater($strstr(%artist%,'ö'),0,1,0),$ifgreater($strstr(%artist%,'ò'),0,1,0),$ifgreater($strstr(%artist%,'û'),0,1,0),$ifgreater($strstr(%artist%,'ù'),0,1,0),$ifgreater($strstr(%artist%,'ÿ'),0,1,0)),$add($ifgreater($strstr(%artist%,'Ö'),0,1,0),$ifgreater($strstr(%artist%,'Ü'),0,1,0),$ifgreater($strstr(%artist%,'¢'),0,1,0),$ifgreater($strstr(%artist%,'£'),0,1,0),$ifgreater($strstr(%artist%,'¥'),0,1,0)),$add($ifgreater($strstr(%artist%,'₧'),0,1,0),$ifgreater($strstr(%artist%,'ƒ'),0,1,0),$ifgreater($strstr(%artist%,'á'),0,1,0),$ifgreater($strstr(%artist%,'í'),0,1,0),$ifgreater($strstr(%artist%,'ó'),0,1,0)),$add($ifgreater($strstr(%artist%,'ú'),0,1,0),$ifgreater($strstr(%artist%,'ñ'),0,1,0),$ifgreater($strstr(%artist%,'Ñ'),0,1,0),$ifgreater($strstr(%artist%,'ª'),0,1,0),$ifgreater($strstr(%artist%,'º'),0,1,0)),$add($ifgreater($strstr(%artist%,'¿'),0,1,0),$ifgreater($strstr(%artist%,'⌐'),0,1,0),$ifgreater($strstr(%artist%,'¬'),0,1,0),$ifgreater($strstr(%artist%,'½'),0,1,0),$ifgreater($strstr(%artist%,'¼'),0,1,0)),$add($ifgreater($strstr(%artist%,'¡'),0,1,0),$ifgreater($strstr(%artist%,'«'),0,1,0),$ifgreater($strstr(%artist%,'»'),0,1,0))),$add($add($ifgreater($strstr(%artist%,'α'),0,1,0),$ifgreater($strstr(%artist%,'ß'),0,1,0),$ifgreater($strstr(%artist%,'Γ'),0,1,0),$ifgreater($strstr(%artist%,'π'),0,1,0),$ifgreater($strstr(%artist%,'Σ'),0,1,0)),$add($ifgreater($strstr(%artist%,'σ'),0,1,0),$ifgreater($strstr(%artist%,'µ'),0,1,0),$ifgreater($strstr(%artist%,'τ'),0,1,0),$ifgreater($strstr(%artist%,'Φ'),0,1,0),$ifgreater($strstr(%artist%,'Θ'),0,1,0)),$add($ifgreater($strstr(%artist%,'Ω'),0,1,0),$ifgreater($strstr(%artist%,'δ'),0,1,0),$ifgreater($strstr(%artist%,'∞'),0,1,0),$ifgreater($strstr(%artist%,'φ'),0,1,0),$ifgreater($strstr(%artist%,'ε'),0,1,0)),$add($ifgreater($strstr(%artist%,'∩'),0,1,0),$ifgreater($strstr(%artist%,'≡'),0,1,0),$ifgreater($strstr(%artist%,'±'),0,1,0),$ifgreater($strstr(%artist%,'≥'),0,1,0),$ifgreater($strstr(%artist%,'≤'),0,1,0)),$add($ifgreater($strstr(%artist%,'⌠'),0,1,0),$ifgreater($strstr(%artist%,'⌡'),0,1,0),$ifgreater($strstr(%artist%,'÷'),0,1,0),$ifgreater($strstr(%artist%,'≈'),0,1,0),$ifgreater($strstr(%artist%,'≈'),0,1,0)),$add($ifgreater($strstr(%artist%,'∙'),0,1,0),$ifgreater($strstr(%artist%,'·'),0,1,0),$ifgreater($strstr(%artist%,'√'),0,1,0),$ifgreater($strstr(%artist%,'ⁿ'),0,1,0),$ifgreater($strstr(%artist%,'²'),0,1,0)),$add($ifgreater($strstr(%artist%,'■'),0,1,0),$ifgreater($strstr(%artist%,' '),0,1,0))))
+
+
+$add($add($add($ifgreater($strstr(%comment%,'!'),0,1,0),$ifgreater($strstr(%comment%,'#'),0,1,0),$ifgreater($strstr(%comment%,'$'),0,1,0),$ifgreater($strstr(%comment%,'%'),0,1,0),$ifgreater($strstr(%comment%,'&'),0,1,0)),$add($ifgreater($strstr(%comment%,'*'),0,1,0),$ifgreater($strstr(%comment%,'+'),0,1,0),$ifgreater($strstr(%comment%,','),0,1,0),$ifgreater($strstr(%comment%,'.'),0,1,0),$ifgreater($strstr(%comment%,'/'),0,1,0)),$add($ifgreater($strstr(%comment%,':'),0,1,0),$ifgreater($strstr(%comment%,';'),0,1,0),$ifgreater($strstr(%comment%,'<'),0,1,0),$ifgreater($strstr(%comment%,'='),0,1,0),$ifgreater($strstr(%comment%,'>'),0,1,0)),$add($ifgreater($strstr(%comment%,'?'),0,1,0),$ifgreater($strstr(%comment%,'@'),0,1,0),$ifgreater($strstr(%comment%,'['),0,1,0),$ifgreater($strstr(%comment%,'\'),0,1,0),$ifgreater($strstr(%comment%,']'),0,1,0)),$add($ifgreater($strstr(%comment%,'^'),0,1,0),$ifgreater($strstr(%comment%,'_'),0,1,0),$ifgreater($strstr(%comment%,'`'),0,1,0),$ifgreater($strstr(%comment%,'{'),0,1,0),$ifgreater($strstr(%comment%,'|'),0,1,0)),$add($ifgreater($strstr(%comment%,'}'),0,1,0),$ifgreater($strstr(%comment%,'~'),0,1,0))),$add($add($ifgreater($strstr(%comment%,'Ç'),0,1,0),$ifgreater($strstr(%comment%,'ü'),0,1,0),$ifgreater($strstr(%comment%,'é'),0,1,0),$ifgreater($strstr(%comment%,'â'),0,1,0),$ifgreater($strstr(%comment%,'ä'),0,1,0)),$add($ifgreater($strstr(%comment%,'à'),0,1,0),$ifgreater($strstr(%comment%,'å'),0,1,0),$ifgreater($strstr(%comment%,'ç'),0,1,0),$ifgreater($strstr(%comment%,'ê'),0,1,0),$ifgreater($strstr(%comment%,'ë'),0,1,0)),$add($ifgreater($strstr(%comment%,'è'),0,1,0),$ifgreater($strstr(%comment%,'ï'),0,1,0),$ifgreater($strstr(%comment%,'î'),0,1,0),$ifgreater($strstr(%comment%,'ì'),0,1,0),$ifgreater($strstr(%comment%,'Ä'),0,1,0)),$add($ifgreater($strstr(%comment%,'Å'),0,1,0),$ifgreater($strstr(%comment%,'É'),0,1,0),$ifgreater($strstr(%comment%,'æ'),0,1,0),$ifgreater($strstr(%comment%,'Æ'),0,1,0),$ifgreater($strstr(%comment%,'ô'),0,1,0)),$add($ifgreater($strstr(%comment%,'ö'),0,1,0),$ifgreater($strstr(%comment%,'ò'),0,1,0),$ifgreater($strstr(%comment%,'û'),0,1,0),$ifgreater($strstr(%comment%,'ù'),0,1,0),$ifgreater($strstr(%comment%,'ÿ'),0,1,0)),$add($ifgreater($strstr(%comment%,'Ö'),0,1,0),$ifgreater($strstr(%comment%,'Ü'),0,1,0),$ifgreater($strstr(%comment%,'¢'),0,1,0),$ifgreater($strstr(%comment%,'£'),0,1,0),$ifgreater($strstr(%comment%,'¥'),0,1,0)),$add($ifgreater($strstr(%comment%,'₧'),0,1,0),$ifgreater($strstr(%comment%,'ƒ'),0,1,0),$ifgreater($strstr(%comment%,'á'),0,1,0),$ifgreater($strstr(%comment%,'í'),0,1,0),$ifgreater($strstr(%comment%,'ó'),0,1,0)),$add($ifgreater($strstr(%comment%,'ú'),0,1,0),$ifgreater($strstr(%comment%,'ñ'),0,1,0),$ifgreater($strstr(%comment%,'Ñ'),0,1,0),$ifgreater($strstr(%comment%,'ª'),0,1,0),$ifgreater($strstr(%comment%,'º'),0,1,0)),$add($ifgreater($strstr(%comment%,'¿'),0,1,0),$ifgreater($strstr(%comment%,'⌐'),0,1,0),$ifgreater($strstr(%comment%,'¬'),0,1,0),$ifgreater($strstr(%comment%,'½'),0,1,0),$ifgreater($strstr(%comment%,'¼'),0,1,0)),$add($ifgreater($strstr(%comment%,'¡'),0,1,0),$ifgreater($strstr(%comment%,'«'),0,1,0),$ifgreater($strstr(%comment%,'»'),0,1,0))),$add($add($ifgreater($strstr(%comment%,'α'),0,1,0),$ifgreater($strstr(%comment%,'ß'),0,1,0),$ifgreater($strstr(%comment%,'Γ'),0,1,0),$ifgreater($strstr(%comment%,'π'),0,1,0),$ifgreater($strstr(%comment%,'Σ'),0,1,0)),$add($ifgreater($strstr(%comment%,'σ'),0,1,0),$ifgreater($strstr(%comment%,'µ'),0,1,0),$ifgreater($strstr(%comment%,'τ'),0,1,0),$ifgreater($strstr(%comment%,'Φ'),0,1,0),$ifgreater($strstr(%comment%,'Θ'),0,1,0)),$add($ifgreater($strstr(%comment%,'Ω'),0,1,0),$ifgreater($strstr(%comment%,'δ'),0,1,0),$ifgreater($strstr(%comment%,'∞'),0,1,0),$ifgreater($strstr(%comment%,'φ'),0,1,0),$ifgreater($strstr(%comment%,'ε'),0,1,0)),$add($ifgreater($strstr(%comment%,'∩'),0,1,0),$ifgreater($strstr(%comment%,'≡'),0,1,0),$ifgreater($strstr(%comment%,'±'),0,1,0),$ifgreater($strstr(%comment%,'≥'),0,1,0),$ifgreater($strstr(%comment%,'≤'),0,1,0)),$add($ifgreater($strstr(%comment%,'⌠'),0,1,0),$ifgreater($strstr(%comment%,'⌡'),0,1,0),$ifgreater($strstr(%comment%,'÷'),0,1,0),$ifgreater($strstr(%comment%,'≈'),0,1,0),$ifgreater($strstr(%comment%,'≈'),0,1,0)),$add($ifgreater($strstr(%comment%,'∙'),0,1,0),$ifgreater($strstr(%comment%,'·'),0,1,0),$ifgreater($strstr(%comment%,'√'),0,1,0),$ifgreater($strstr(%comment%,'ⁿ'),0,1,0),$ifgreater($strstr(%comment%,'²'),0,1,0)),$add($ifgreater($strstr(%comment%,'■'),0,1,0),$ifgreater($strstr(%comment%,' '),0,1,0))))
+
+---------- LISTA CAMPOS 
+
+
+ 		
+%acoustid_id%;
+%acoustid_fingerprint%;
+%album%;
+%albumsort%;
+%albumartist%;
+%albumartistsort%;
+%artist%;
+%artistsort%;
+%barcode%;
+%bpm%;
+%catalognumber%;
+%comment%;
+%compilation%;
+%composer%;
+%composersort%;
+%conductor%;
+%contentgroup%;
+%copyright%;
+%date%;
+%description%;
+%discnumber%;
+%encodedby%;
+%encodersettings%;
+%encodingtime%;
+%fileowner%;
+%filetype%;
+%genre%;
+%grouping%;
+%initialkey%;
+%involvedpeople%;
+%isrc%;
+%language%;
+%length%;
+%lyricist%;
+%mediatype%;
+%mixartist%;
+%mood%;
+%movementname%;
+%movement%;
+%movementtotal%;
+%musicbrainz_albumartistid%;
+%musicbrainz_albumid%;
+%musicbrainz_albumreleasecountry%;
+%musicbrainz_albumstatus%;
+%musicbrainz_albumtype%;
+%musicbrainz_artistid%;
+%musicbrainz_discid%;
+%musicbrainz_originalalbumid%;
+%musicbrainz_originalartistid%;
+%musicbrainz_releasegroupid%;
+%musicbrainz_releasetrackid%;
+%musicbrainz_trackid%;
+%musicbrainz_trmid%;
+%musicbrainz_workid%;
+%musiciancredits%;
+%narrator%;
+%netradioowner%;
+%netradiostation%;
+%origalbum%;
+%origartist%;
+%origfilename%;
+%origlyricist%;
+%origyear%;
+%podcast%;
+%podcastcategory%;
+%podcastdesc%;
+%podcastid%;
+%podcastkeywords%;
+%podcasturl%;
+%popularimeter%;
+%publisher%;
+%rating mm%;
+%rating wmp%;
+%releasetime%;
+%setsubtitle%;
+%subtitle%;
+%taggingtime%;
+%title%;
+%titlesort%;
+%track%;
+%uniquefileid%;
+%unsyncedlyrics%;
+%www%;
+%wwwartist%;
+%wwwaudiofile%;
+%wwwaudiosource%;
+%wwwcommercialinfo%;
+%wwwcopyright%;
+%wwwpayment%;
+%wwwpublisher%;
+%wwwradiopage%;
+%year%;
+%other fields%;
+
+
+%acoustid_id%;%acoustid_fingerprint%;%album%;%albumsort%;%albumartist%;%albumartistsort%;%artist%;%artistsort%;%barcode%;%bpm%;%catalognumber%;%comment%;%compilation%;%composer%;%composersort%;%conductor%;%contentgroup%;%copyright%;%date%;%description%;%discnumber%;%encodedby%;%encodersettings%;%encodingtime%;%fileowner%;%filetype%;%genre%;%grouping%;%initialkey%;%involvedpeopl%;%isrc%;%language%;%length%;%lyricist%;%mediatype%;%mixartist%;%mood%;%movementname%;%movement%;%movementtotal%;%musicbrainz_abumartistid%;%musicbrainz_albumid%;%musicbrainz_albumreleasecountry%;%musicbrainz_albumstatus%;%musicbrainz_albumtype%;%musicbrinz_artistid%;%musicbrainz_discid%;%musicbrainz_originalalbumid%;%musicbrainz_originalartistid%;%musicbrainz_releasegroupid%;%msicbrainz_releasetrackid%;%musicbrainz_trackid%;%musicbrainz_trmid%;%musicbrainz_workid%;%musiciancredits%;%narrator%;%netradiowner%;%netradiostation%;%origalbum%;%origartist%;%origfilename%;%origlyricist%;%origyear%;%podcast%;%podcastcategory%;%podcastdsc%;%podcastid%;%podcastkeywords%;%podcasturl%;%popularimeter%;%publisher%;%rating mm%;%rating wmp%;%releasetime%;%setsubtitle%;%subtitle%;%taggingtime%;%title%;%titlesort%;%track%;%uniquefileid%;%unsyncedlyrics%;%www%;%wwartist%;%wwwaudiofile%;%wwwaudiosource%;%wwwcommercialinfo%;%wwwcopyright%;%wwwpayment%;%wwwpublisher%;%wwwradiopage%;%year%;%ther fields%;
+
+
+%_bitrate%;
+%_codec%;
+%_cover_mimetype%;
+%_cover_size%;
+%_cover_type%;
+%_cover_height%;
+%_cover_width%;
+%_covers%;
+%_id3v2_character_encoding%;
+%_length%;
+%_length_seconds%;
+%_mode%;
+%_samplerate%;
+%_tag%;
+%_tag_read%;
+%_tag_size%;
+%_tag_size_appended%;
+%_tag_size_prepended%;
+%_tool%;
+%_vbr%;
+%_directory%;
+%_extension%;
+%_filename%;
+%_filename_ext%;
+%_folderpath%;
+%_folderpath_rel%;
+%_path%;
+%_parent_directory%;
+%_volume%;
+%_workingdir%;
+%_workingpath%;
+%_playlist_filename%;
+%_playlist_filename_ext%;
+%_playlist_folderpath%;
+%_file_create_date%;
+%_file_create_datetime%;
+%_file_create_datetime_raw%;
+%_file_mod_date%;
+%_file_mod_datetime%;
+%_file_mod_datetime_raw%;
+%_file_size%;
+%_file_size_bytes%;
+%_file_size_kb%;
+%_file_size_mb%;
+%_crc%;
+%_md5%;
+%_md5audio%;
+%_app%;
+%_counter%;
+%_date%;
+%_datetime%;
+%_max_counter%;
+%_total_files%;
+%_total_size%;
+%_total_size_raw%;
+%_total_time%;
+%_total_time2%;
+%_total_time_raw%;
+
+%_bitrate%;%_codec%;%_cover_mimetype%;%_cover_size%;%_cover_type%;%_cover_height%;%_cover_width%;%_covers%;%_id3v2_character_ecoding%;%_length%;%_length_seconds%;%_mode%;%_samplerate%;%_tag%;%_tag_read%;%_tag_size%;%_tag_size_appended%;%_tag_size_prepened%;%_tool%;%_vbr%;%_directory%;%_extension%;%_filename%;%_filename_ext%;%_folderpath%;%_folderpath_rel%;%_path%;%_parent_direcory%;%_volume%;%_workingdir%;%_workingpath%;%_playlist_filename%;%_playlist_filename_ext%;%_playlist_folderpath%;%_file_create_ate%;%_file_create_datetime%;%_file_create_datetime_raw%;%_file_mod_date%;%_file_mod_datetime%;%_file_mod_datetime_raw%;%_file_ize%;%_file_size_bytes%;%_file_size_kb%;%_file_size_mb%;%_crc%;%_md5%;%_md5audio%;%_app%;%_counter%;%_date%;%_datetime%;%_max_cunter%;%_total_files%;%_total_size%;%_total_size_raw%;%_total_time%;%_total_time2%;%_total_time_raw%;
+
+
+Technical info	
+Placeholder	Description
+%_bitrate%	Bitrate in kbit/s
+%_codec%	Codec
+%_cover_mimetype%	Mimetype of first cover art in the tag of the file
+%_cover_size%	Size of first cover art in the tag of the file in bytes
+%_cover_type%	Cover type of first cover art in the tag of the file
+%_cover_height%	Cover height of first cover art in the tag of the file in pixels
+%_cover_width%	Cover width of first cover art in the tag of the file in pixels
+%_covers%	Count of cover art in the tag of the file
+%_id3v2_character_encoding%	Encoding of the ID3v2 text frames of the file.
+%_length%	Length (formatted)
+%_length_seconds%	Length (in seconds)
+%_mode%	Mode
+%_samplerate%	Sample rate
+%_tag%	Available tag types in file
+%_tag_read%	Displayed tag type
+%_tag_size%	Size of all tags in bytes
+%_tag_size_appended%	Size of all appended tags in bytes
+%_tag_size_prepended%	Size of all prepended tags in bytes
+%_tool%	Additional codec information (not available for all supported audio formats).
+%_vbr%	Bitrate type or compression profile
+ 
+File name / path info	
+Placeholder	Description
+%_directory%	Name of the parent directory
+%_extension%	File extension
+%_filename%	File name without extension
+%_filename_ext%	File name with extension
+%_folderpath%	Path without file name
+%_folderpath_rel%	Folderpath relative to Export output file if output and track files are on same drive, else absolute
+%_path%	File name with path
+%_parent_directory%	Name of the grandparent folder
+%_volume%	Volume label
+%_workingdir%	Name of current working directory
+%_workingpath%	Path of current working directory
+%_playlist_filename%	File name of current playlist without extension
+%_playlist_filename_ext%	File name of current playlist with extension
+%_playlist_folderpath%	Folderpath of current playlist
+
+File properties	
+Placeholder	Description
+%_file_create_date%	Short creation date
+%_file_create_datetime%	Long creation date
+%_file_create_datetime_raw%	Long creation date (unformatted)
+%_file_mod_date%	Short modification date
+%_file_mod_datetime%	Long modification date
+%_file_mod_datetime_raw%	Long modification date (unformatted)
+%_file_size%	File size in human readable format
+%_file_size_bytes%	File size in bytes
+%_file_size_kb%	File size in kilobytes
+%_file_size_mb%	File size in megabytes
+%_crc%	CRC32 value of file content
+%_md5%	MD5-Hash of the file (slow!)
+%_md5audio%	MD5-Hash of the audio part of the file (slow and only supported for ID3- and/or APE-only tagged files)
+
+System	
+Placeholder	Description
+%_app%	Mp3tag, e.g. Mp3tag v3.01
+%_counter%	Current counter value (ascending from 1) of the immediately containing loop
+%_date%	Short date
+%_datetime%	Long date
+%_max_counter%	Maximum value of counter of the last closed loop.
+
+Global placeholders	(providing totals for the preceding $loop/$loopend)	
+
+Placeholder	Description
+%_total_files%	Total number of files
+%_total_size%	Total file size (formatted output)
+%_total_size_raw%	Total file size in bytes
+%_total_time%	Total playing time (formatted output)
+%_total_time2%	Total playing time (formatted output without days)
+%_total_time_raw%	Total playing time in seconds
+
+--------  buscar en web 
+
+Umberto Tozzi Tu discogs genre style
+discogs genre style
+
+que es _tool en mp3tag
+
+
+https://es.wikipedia.org/wiki/Anexo:Canciones_de_The_Beatles_interpretadas_por_otros_artistas#S
+
+Soda Stereo
+«I Want You (She's So Heavy)» y «The End» (interpretadas —con la letra de «I Want You (She's So Heavy)» sobre el tema «The End»— en vivo en el recital gratuito en la Avenida 9 de Julio en 1991)
+«I Saw Her Standing There» (interpretada en vivo en el Club Marabú en 1984 con el título «La vi parada ahí»)
+
+cancion con todos
+https://es.wikipedia.org/wiki/Canci%C3%B3n_con_todos 
+
+
+mejores rap
+https://www.youtube.com/watch?v=TPy2A8SANKQ
+
+
+http://elgeek.com/2007/03/21/descargar-musica-con-google/
+
+-inurl:(htm|html|php) intitle:"index of" +"last modified" +"parent directory" +description +size +(wma|mp3) "Tiesto"
+
+http://www.grupogeek.com/2007/10/27/truco-para-buscar-y-bajar-musica-con-google/
+
+intitle: “index.of” “no.one.knows” (mp3|mp3|ogg|wma) -html -htm -php -asp -jsp
+
+ 
+---------- ---------- FILTROS ---------- ---------- 
+
+https://docs.mp3tag.de/scripting/#string-functions
+https://community.mp3tag.de/
+https://community.mp3tag.de/t/filter-expressions/10080/4
+https://community.mp3tag.de/t/find-duplicate-files-in-different-music-directories/47952/33
+https://community.mp3tag.de/t/scripting-functions/51689
+https://docs.mp3tag.de/filter/https://community.mp3tag.de/t/filtering-and-searching-files-and-tags/53271
+https://docs.mp3tag.de/format/
+https://wiki.slimdevices.com/index.php/Mp3tag.html
+https://community.mp3tag.de/t/filter-expressions/10080/3
+https://community.mp3tag.de/t/error-using-cutright-mid-left-with-len/61290/1
+
+https://docs.mp3tag.de/regex/
+
+https://docs.mp3tag.de/filter/
+
+
+---------- ---------- OTROS ---------- ---------- 
+
+Check if a field is longer than 4 characters:
+"$len(%bpm%)" GREATER 4
+
+Files with multipe artist tags:
+"$meta_sep(Artist,\\)" HAS \\
+
+Check if two fields have the same value:
+"$if($eql(%artist%,%albumartist%),yes,no)" IS yes
+
+si tiene el year en 0000
+$if($eql(%year%,'0000'),,%year%)
+
+$if ($len((%title%)>2,yes,no) IS yes
+
+Check if the title is part of the filename:
+"$ifgreater($strstr(%_filename%,%title%),0,yes,no)" IS yes
+
+Track numbers that have number/number syntax
+track MATCHES \d\/\d
+
+Filenames that start with two digits:
+%_filename% MATCHES ^\d\d
+
+Filenames that start with two digits not followed by another digit:
+%_filename% MATCHES ^\d\d\D
+
+Case sensitive filter:
+title MATCHES (?-i)regex
+
+Files with characters that are not in ISO-8859-1 in tag or filename
+* MATCHES [\x{0100}-\x{FFFF}]
+
+Filenames with 2 hyphens
+"$len($regexp(%_filename%,'[^-]',))" IS 2
+
+Filenames with at least 2 hyphens
+"$len($regexp(%_filename%,'[^-]',))" GREATER 1
+
+Track number is a single digit
+track MATCHES ^\d$
+
+Title tag starts with four capital letters
+"$if($eql($regexp(%title%,^\u\u\u\u,),%title%),yes,no)" IS no
+
+
+---------- ---------- SECOND GNERE ---------- ---------- 
+
+
+https://community.mp3tag.de/t/how-to-convert-multiple-genre-tag-fields-into-one/54828/3
+
+---------- ---------- LEER  ---------- ---------- 
+
+https://wiki.slimdevices.com/index.php/Mp3tag.html
+
+
+https://community.mp3tag.de/t/convert-to-title-case/10671/2
+
+---------- ---------- FIND LYRICS ---------- ---------- 
+
+
+https://community.mp3tag.de/t/ws-genius-lyrics/52933
+https://community.mp3tag.de/t/finding-all-records-that-have-an-empty-lyrics-field/57488
+https://askubuntu.com/questions/190224/how-to-display-lyrics-that-are-stored-in-mp3-tag
+https://community.mp3tag.de/t/how-to-export-and-import-lyrics/19391
+https://mp3tag.app/changelog/
+https://community.mp3tag.de/t/when-using-tag-filename-square-brackets-are-not-displayed/18610
+https://community.mp3tag.de/t/writing-filenames-with-square-brackets/14459
+
+
+https://community.mp3tag.de/t/inserting-lyrics-using-mp3-tag/19569
+As you wrote you filled the tag-field UNSYNCEDLYRICS. As the word says the lyrics you put in there are not synchronizeded and not meant to show scrolling along when you play a song.
+If your Player is able to do you anyway can show them at a whole.
+"eng||" is at the beginning and shows the language. MP3Tag shows this but you don't have to care about it because other software that is able to show the lyrics doesn't show it. Answay it has to be in there.
+
+What you are looking for ist the tag-frame SYLT (Synchronized Lyrics). This tag-frame is not supported by MP3Tag. To embed them in your MP3s you need other software, i.e.
+https://www.compuphase.com/software_sylteditor.htm 1.9k
+http://www.crintsoft.com/MiniLyrics.php 1.4k
+
+Note that to have synchronized lyrics it is not enough to have the lyrics-text. The tag-field also needs to have information for synchronizing with the music. That means that if you don't embed already prepared lyrics its up to you to edit the sync-informations before embedding the lyrics.
+
+
+
+lyricist
+origlyricist
+unsyncedlyrics
+
+%lyricist%
+%origlyricist%
+%unsyncedlyrics%
+
+%unsyncedlyrics% MISSING
+  
+---------- ---------- CONVERTIR A MP3 ---------- ---------- 
+
+https://audio.online-convert.com/es/convertir-a-mp3
+https://www.movavi.com/es/support/how-to/convertir-wma-a-mp3.html
+
+Descargar MP3 / Videos	
+www.descargaryoutube.com/
+https://www.onlinevideoconverter.com/es
+https://mp3-youtube.download/es
+
+
+https://www.movavi.com/es/support/how-to/convertir-wma-a-mp3.html
+
+
+---------- ---------- DESCARGAS ---------- ---------- 
+
+
+https://vacilecorronchero.es.tl/
+
+https://descargasvallenatosenvivo.blogspot.com/
+
+https://discografiasvallenatass.blogspot.com/
+
+http://labacanastereo.wixsite.com/descargaspremium/descargas-gratis
+PASSWORD: labacanastereo
+
+https://www.buenamusica.com/discografias
+
+https://ladiscoteca360.blogspot.com/p/discografias-completas-y-320-kbps.html
+
+http://old.latinastereo.com/SalserodelMes/JoeArroyo/Discografia.aspx
+
+https://discografiaspormega.org/
+
+https://www.discografiasmega.com/salsa/
+
+https://emporiosalsero.blogspot.com/search?q=arroyo
+
+https://conmiguelitolasalsanuncamuere.blogspot.com/2015/10/coleccion-joe-arroyo-exitos-de-historia.html
+
+https://colombiamelodiosa.blogspot.com/search/label/JOE%20ARROYO
+
+PASSWORD: Viva_La_Salsa
+
+https://divxonline.org/
+
+https://dontorrent.clothing/buscar/thor
+
+---------- ----------  megadiscografiascompletas 
+
+https://megadiscografiascompletas.com
+
+PASSWORD: megadiscografiascompletas.com
+
+https://megadiscografiascompletas.com/2017/03/22/descargar-discografia-daniela-romo/
+
+https://megadiscografiascompletas.com/2019/04/07/descargar-discografia-fito-paez/
+Fito Paez - Acústico (1996).
+Fito Paez - Álbumes de estudio - Circo Beat (1994)
+Fito Paez - Álbumes de estudio - Dreaming Rosario (2013)
+Fito Paez - Álbumes de estudio - EADDA9223 (2023)
+Fito Paez - Álbumes de estudio - Futurología Arlt (2022)
+Fito Paez - Álbumes de estudio - La ciudad liberada (2017)
+Fito Paez - Álbumes de estudio - La conquista del espacio (2020)
+Fito Paez - Álbumes de estudio - Locura total con Paulinho Moska (2015)
+Fito Paez - Álbumes de estudio - Los años salvajes (2021)
+Fito Paez - Álbumes de estudio - Rock and Roll Revolution (2014)
+Fito Paez - Álbumes de estudio - The Golden Light (2022)
+Fito Paez - Álbumes de estudio - Tu Vida Mi Vida
+Fito Paez - Álbumes de estudio - Yo te amo (2013)
+Fito Paez - Álbumes en vivo- El amor después del amor 20 años (2012)
+Fito Paez - Bootlegs - Café de las artes, Baglietto, Páez, Goldin y Garre (1981).
+Fito Paez - Bootlegs - Staff EP (1981).
+Fito Paez - Fito en Miami (2001).
+Fito Paez - Fito en Rosario (2010).
+
+fonseca
+https://megadiscografiascompletas.com/2018/12/27/descargar-discografia-fonseca/
+
+GIAN FRANCO PAGLIARO
+https://mega.nz/folder/RedxwZrY#0lRu70wAUV23r8DJ1yVFfQ	
+
+GIAN MARCO
+https://mega.nz/folder/KnpXHI6S#r_yj6QsLtKSsjBHowE3oTQ
+
+FULANITO
+https://pastemdc.megadiscografiascompletas.xyz/p?id=51824946880
+https://gibibox.com/spanish/sharing/link?surl=h8mtQ-Q4HNikQ51CiTqjUA&sid=MDs4o7D7YOYPVQIWBkQEeA%3D%3D&cp=1
+
+GLORIA ESTEFAN
+https://mega.nz/folder/0XF12S5J#xjJe1QJB5TAJh1XopbSH-Q
+
+HERENCIA DE TIMBIQUÍ
+https://mega.nz/folder/QGMHhLoR#0dXlesjeKsJofPO5wfVYJQ
+
+ILLYA KURYAKI AND THE VALDERRAMAS
+https://mega.nz/folder/Yvg2xCoC#kMMxBocO4EZtVnFspUCZfA
+
+isabel pantoja
+https://mega.nz/folder/cn12zAiB#yc6OzjZLhvl4WWseAeLp_A
+
+ISMAEL MIRANDA
+https://mega.nz/folder/4bF3FaTY#JLuNN2bHxB1olcnOzJXxoA
+
+ISMAEL RIVERA
+https://mega.nz/folder/hS1ygSSL#6mIT024C9s0yvLaB-YNqoA
+
+johnny pacheco
+https://megadiscografiascompletas.com/category/johnny-pacheco/
+
+johnny VENTURA 
+
+---------- ---------- THE PIRATE BAY  ---------- ---------- 
+
+user the pirate bay:
+GalaxyRG
+GalaxyTV
+threesome
+
+https://thepiratebay.org/search.php?q=user:TGxGoodies:3
+			
+https://fmhy.net/non-english#german
+
+https://www.youtube.com/@diskmusicwsc7082/videos
+
+https://www.misdiscosviejos.com/?s=guayacan
+
+https://pirataincomprendido.blogspot.com/search/label/Orquesta%20Guayacan
+
+como descarar en ANDROID
+https://labacanastereo.blogspot.com/2015/03/escuchar-descargar-discografia-completa.html#google_vignette
+
+
+-------------------------- -------------------------- -------------------------- --------------------------
+-------------------------- -------------------------- -------------------------- --------------------------
+-------------------------- -------------------------- -------------------------- --------------------------
+
+ver por que Madonna 
+The Immaculate Collection - Crazy For You es mejor calidad que las otras Crazy For
+Otro ejemplo:
+The Immaculate Collection  - Vogue 
+Celebration Cd1 - Vogue
+
+1. MP3 de 192 Kbps VBR MEJOR!
+2. MP3 de 160 Kbps VBR 
+3. MP3 de 128 Kbps CBR
+
+El MP3 a 160 Kbps VBR es la muestra de mayor calidad, mejor incluso que el MP3 a 320 Kbps CBR. 
+
+Esto indica que la codificación con una tasa de bits variable es superior a la fija incluso a esos valores, 
+y que 160 Kbps VBR para arriba es imposible de mejorar cualitativamente.
+
+La conclusión del estudio confirma la hipótesis de que un MP3 a 192 Kbps VBR tiene tanta calidad 
+que ni el ultrasensible y poderoso oído de un perro notaría la diferencia con un CD de audio. 
+
+Como conclusión, ya sabemos pues a qué tasa codificar y comprimir si queremos un buen ahorro en 
+almacenamiento sin perder calidad: a MP3 de 192 Kbps VBR, el formato ganador de la prueba.
+
+La única muestra que arrojó ser muy diferente a las demás fue el MP3 a 128 Kbps CBR, 
+el de peor calidad, por lo cual es mejor desecharla.
+
+
+---------------------------- ---------------------------- ----------------------------
+
+---------- buscar modificar mp3 sin duracion 
+
+
+Alejo Duran - 1971 - 2 Mas Vallenatos - 01 - La Mujer Que Tengo (Quedate Tranquila)
+Alejo Duran - 1969 - 3 Rey Negro Del Acordeon Vallenato - 01 - Mosaico Alejo Iiestancia estrella
+Fine Young Cannibals - 1989 - 0 - 00 - Good Thing
+Jorge Celedon - 2003 - Llevame En Tus Suenos - 01 - Parranda En El Cafetal
+Alejo Duran - 1972 - 4 Rey Negro En Acordeon Vallenato - 01 - Fidelina
+Alejo Duran - 1971 - 2 Mas Vallenatos - 01 - La Cachucha Bacana
+Alejo Duran - 1969 - 3 Rey Negro Del Acordeon Vallenato - 01 - La Mujer Y La Primavera (Alejandro Duran)(Merengue)
+Alejo Duran - 1969 - 3 Rey Negro Del Acordeon Vallenato - 01 - Pena Y Dolor
+Foo Fighters - 2002 - One By One (Limited Edition) - 01 - Times Like These
+Jorge Celedon - 2003 - Llevame En Tus Suenos - 01 - No Podran Separarnos
+Jorge Celedon - 2003 - Llevame En Tus Suenos - 01 - Por Estar Adorandote
+Jorge Celedon - 2003 - Llevame En Tus Suenos - 01 - Por Tu Primer Beso
+Peter Manjarres - 2009 - El Caballero Y El Rey  (Sergio Luis Rodriguez) - 01 - Tragao De Ti
+Sophie Ellis Bextor - 2004 - 0 - 00 - Murder On The Dancefloor
+
+---------- Lista artistas 
+
+alcolirykoz
+alex acosta
+alfa 8
+alfredo de la fe
+aniceto molina 
+antonio aguilar
+
+braulio
+
+chavela vargas
+chiquetete
+clash (the)
+conjunto clasico
+
+dyango
+
+francisco cespedes
+freddy rodriguez 
+
+gabino pampini
+gabriel raymon
+gabriel romero
+garzon y collazos  - cenizas al viento
+gatos negros (los) -  un poquito de carino
+gian franco pagliaro
+gilberto santa rosa
+giovany ayala
+gloria stefan 
+gloria trevi
+greco - alza tu copa y brindemos por el adios
+guillermo davila - dejate amar
+guillermo davila - echame a mi la culpa
+gustavo rodriguez - nunca te dejare ir
+
+hansel camacho
+harry styles
+helenita vargas
+hermanos arriagada - debut y despedida
+hives (the)
+
+killers (the)
+
+lady gaga
+lalo rodriguez
+leo marini
+leonardo marin
+lucho gatica
+lucia mendez
+luis alberto spinteta
+
+macy gray hits
+magnate y valentino
+maia
+manolo galvan
+maria dolores pradera
+mario rincon - sabor navideño
+melcochita
+monica naranjo
+
+nelson ned
+new york band (the)
+noel petro
+
+olimpo cardenas
+orquesta la dicupe
+orquesta narvaez
+oscar agudelo
+oscar golden
+
+palito ortega
+paloma san basilio
+panda
+pedro infante
+placebo
+profetas - chocolate
+
+rabito
+radio futura
+raul santy
+ray barreto
+reincidentes
+rocio jurado
+romulo caicedo
+
+samir bazzi o bazil alexander
+sergio y estibaliz - buscame
+seru giran
+simple plan
+simply red
+sin animo de lucro
+sin bandera cd 	pasado
+skatalites (the)
+son 14
+son by four
+son de cali
+steel pulse the island anthology
+stereophonics
+strokes (the)
+sui generis 
+
+tito cortes
+tito rojas
+trio siboney - alma corazon y vida  
+trio siboney - el dia que me quieras
+
+zz Aun No Los Relicarios
+zz Aun No Los Reyes
+zz Aun No Los Terricolas
+zz Aun No Los Tres Diamantes
+zz Aun No Los Tres Reyes
+zz Aun No Los trovadores del cuyo
+zz Aun No Los Visconti
+zz Aun No Lucho Gatica
+zz Aun No Luis Alberto Posada
+zz Aun No Pedro Guerra
+zz Aun No Placido Domingo
+zz Aun No Roberto Ledesma
+
+tango A Media Luz 
+tango Caminito 
+tango El Dia Que Me Quieras
+tango La Ultima Copa 
+tango nada
+tango Nostalgias -- a borrar antoguos besos 
+tango por una cabeza 
+tango uno 
+tango volver
+tango Nostalgias quier emborrachar mi corazon para olvidar un lco amor
+Juan D'arienzo - Alberto Echagüe - Armando Laborde
+
+---------- buscar de nuevo
+
+
+Lily Allen - Somewhere Only We Know (Live du Grand Journal) - https://www.youtube.com/watch?v=CW_ZiojrkVY
+Somewhere Only We Know ( COVER KEANE ) - Lily Allen - https://www.youtube.com/watch?v=CW_ZiojrkVY
+ 
+--  Lanzada en el álbum “Terapia Criolla con Elio Boom” (1995), la canción se convirtió en uno de los clásicos de la champeta criolla más importantes de la década.
+--   Al igual que “El gol”, “La turbina” surge como una adaptación de la pieza “Tour-à-tour” de los congoleños Kin’ Stars
+-- https://www.youtube.com/watch?v=8DqxQg7ILpA
+-- http://bdigital.unal.edu.co/65232/1/60264-306258-1-SM.pdf
+
+
+Emmanuel Toda La Vida en italiano
+Luis Fonsi otros
+Magneto otros
+Alejandra Guzman - 2019 - Live At The Roxy descargar de nuevo
+El Hombre Del Piano otras versiones
+chuck berry otras versiones
+Alejandra Guzman - 2019 - Live At The Roxy descargar de nuevo
+Contigo Aprendi original
+el reloj original (reloj deten tu camino por que mi vida se apaga)
+Noche De Ronda original
+Ricardo Montaner De Repente original Ricardo Montaner
+Ricardo Montaner Procuro Olvidarte original Ricardo Montaner
+Ricardo Montaner Y Como Es El original Ricardo Montaner
+Ricardo Montaner dejame llorar or iginal Ricardo Montaner
+Ricardo Montaner En El Ultimo Lugar Del Mundo original Ricardo Montaner
+Ricardo Montaner La Cima Del Cielo original Ricardo Montaner
+Ricardo Montaner Me Va A Extranar original Ricardo Montaner
+Ricardo Montaner Ojos Negros original Ricardo Montaner
+Ricardo Montaner Sera original Ricardo Montaner
+Ricardo Montaner Solo Con Un Beso original Ricardo Montaner
+Ricardo Montaner Tan Enamorados original Ricardo Montaner
+Ricardo Montaner Llorando penas original
+GILBERTO SANTA ROSA - DE COLORES Original 
+GILBERTO SANTA ROSA -Que Manera De Quererte original 
+GILBERTO SANTA ROSA -sombra loca original 
+Victor Manuelle - Se Me Rompe El Alma
+cinco Centavitos original 
+Luis Alberto Posada - Fatalidad - 2016
+Luis Alberto Posada - Niegalo Todo - 2016
+Luis Alberto Posada - Rondando Tu Esquina - 2016
+Andres Cepeda Siempre Queda Una Cancion No Voy A Dejarte Ir original
+Andres Cepeda organizar albumnes
+Paulina Rubio - Baila Casanova in spanish
+ac dc with bon scott
+Alvaro Torres  Para Amarnos Mas  1991
+Calo - Cachete Pechito Y Ombligo  2018 audio
+Derek Lopez  Batida De Coco  0000 audio
+Laura Pausini  audio ver italiano 
+Juan Gabriel  Asi Fue (Live)  ver año disxcografia
+Ricardo Arjona  audio
+Ricardo Montaner  Hechale Lena Al Fuego  buscar
+Ricardo Montaner audio 
+Servando Y Florentino Una Cancion Que Te Enamore https://www.youtube.com/watch?v=F3GywjO157I 
+el aventurero varias versiones
+50 De Joselito (Los) Buscar las originales
+
+Falcons (Los) - Aquellos Diciembres - 1996 x
+https://www.youtube.com/watch?v=AsnAli6UVLs
+https://www.youtube.com/watch?v=cdOuDfDt6cM
+https://www.youtube.com/watch?v=1MYYKcEICJM
+Integracion (La) - Las Tres Perlas - 0000 x
+Nelson Y Sus Estrellas
+Pastor Lopez - Es Tarde Ya - 0000
+https://www.youtube.com/watch?v=3qFsk_9QLSw Es tarde ya - Los Dumis, Jorge Grajales
+Super Combo Los Tropicales - Esta Noche Amanecemos - 0000
+https://www.youtube.com/watch?v=ydt50UZBYJM
+https://www.youtube.com/watch?v=t4o1yvrRmrQ
+
+Chuck Berry Johnny B Goode 1958 varias versiones 
+Depeche Mode Enjoy The Silence Live diferente version
+Depeche Mode Its No Good Live diferente version
+Depeche Mode Personal Jesus Live diferente version
+Depeche Mode Policy Of Truth Live diferente version
+Diablitos (Los) organizar cuando son los gigantes
+
+Joe Arroyo ver cual con laton y fruko
+Jose Alfredo Jimenez depurar cuale si y cuales no
+Latin Brothers cual con joe 
+Laura Pausini mejorar sonido de canciones y traducir
+Lucho Bermudez mejorar sonido
+Miguel Morales arreglar
+Prisioneros buscar mas versiones
+Prisioneros Pa Pa Pa 1988 buscar mas versiones
+Queen Live At Wembley buscar cd completo
+Queen Live At Wembley quine mas cantó ese dia
+Ramon Orlando El Virao buscar orignal hijo de cuco
+Ramon Orlando El Venao buscar orignal hijo de cuco
+Recocha buscar El Desorden 
+
+The Killers otras
+Umberto Tozzi buscar Felicidad en italiano 
+Zangalewa (Golden Sounds) - Zangalewa (El Militar)(v1) - 1974 buscar dos versiones
+
+
+
+-------- las 500 de rolling stones 
+
+
+
+artista	g1	titulo
+
+Aaron Neville	 - 	Tell It Like It Is
+Aerosmith	 - 	Sweet Emotion
+Afrika Bambaataa	 - 	Planet Rock
+Al Green	 - 	Take Me To The River
+Al Green	 - 	Tired Of Being Alone
+Alice Cooper	 - 	School's Out
+Alice Cooper	 - 	I'm Eighteen
+Archie Bell & The Drells	 - 	Tighten Up
+Aretha Franklin	 - 	I Never Loved A Man (The Way I Love You)
+Aretha Franklin	 - 	Chain Of Fools
+Aretha Franklin	 - 	Do Right Woman, Do Right Man
+B.B. King	 - 	The Thrill Is Gone
+Barrett Strong	 - 	Money (That's What I Want)
+Ben E. King	 - 	Spanish Harlem
+Big Brother And The Holding Company	 - 	Piece Of My Heart
+Big Joe Turner	 - 	Shake, Rattle & Roll
+Big Star	 - 	September Gurls
+Big Star	 - 	Thirteen
+Bill Withers	 - 	Ain't No Sunshine
+Blue Öyster Cult	 - 	(Don't Fear) The Reaper
+Bo Diddley	 - 	Bo Diddley
+Bo Diddley	 - 	Who Do You Love
+Bob Dylan	 - 	Desolation Row
+Bob Dylan	 - 	Positively 4th Street
+Bob Dylan	 - 	Just Like A Woman
+Bob Dylan	 - 	Subterranean Homesick Blues
+Bob Dylan	 - 	Highway 61 Revisited
+Bob Dylan	 - 	Visions Of Johanna
+Bobbie Gentry	 - 	Ode To Billie Joe
+Bobby Darin	 - 	Mack The Knife
+Bonnie Raitt	 - 	I Can't Make You Love Me
+Booker T. & The MG's	 - 	Green Onions
+Brook Benton	 - 	Rainy Night In Georgia
+Buddy Holly	 - 	Rave On
+Buddy Holly	 - 	Peggy Sue
+Buddy Holly	 - 	Everyday
+by Dionne Warwick	 - 	Walk On
+Carl Perkins	 - 	Blue Suede Shoes
+Carole King	 - 	It's Too Late
+Carpenters	 - 	We've Only Just Begun
+Chuck Berry	 - 	Maybellene
+Chuck Berry	 - 	Rock & Roll Music
+Chuck Berry	 - 	Sweet Little Sixteen
+Chuck Berry	 - 	Brown Eyed Handsome Man
+Cream	 - 	White Room
+Cream	 - 	Crossroads
+Creedence Clearwater Revival	 - 	Proud Mary
+Creedence Clearwater Revival	 - 	Who'll Stop The Rain
+Creedence Clearwater Revival	 - 	Bad Moon Rising
+Crosby, Stills & Nash	 - 	Suite: Judy Blue Eyes
+Crosby, Stills, Nash & Young	 - 	Ohio
+David Bowie	 - 	Changes
+David Bowie	 - 	Ziggy Stardust
+David Bowie	 - 	Young Americans
+Dion	 - 	The Wanderer
+Dion	 - 	Runaround Sue
+Dr. Dre	 - 	Nuthin' But A 'G' Thang
+Dusty Springfield	 - 	Son Of A Preacher Man
+Dusty Springfield	 - 	You Don't Have To Say You Love Me
+Eagles	 - 	Desperado
+Earth, Wind & Fire	 - 	That's The Way Of The World
+Eddie Cochran	 - 	Summertime Blues
+Eddie Cochran	 - 	C'mon Everybody
+Elton John	 - 	Your Song
+Elton John	 - 	Candle In The Wind
+Elton John	 - 	Goodbye Yellow Brick Road
+Elton John	 - 	Tiny Dancer
+Elvis Costello	 - 	Alison
+Elvis Costello	 - 	Watching The Detectives
+Elvis Costello & The Attractions	 - 	(What's So Funny 'Bout) Peace Love And Understanding?
+Elvis Presley	 - 	Heartbreak Hotel
+Elvis Presley	 - 	Love Me Tender
+Eric B. & Rakim	 - 	I Know You Got Soul
+Fats Domino	 - 	Ain't It A Shame
+Five Stairsteps	 - 	O-o-h Child
+Fleetwood Mac	 - 	Go Your Own Way
+Fleetwood Mac	 - 	Rhiannon
+Four Tops	 - 	Reach Out I'll Be There
+Four Tops	 - 	Baby I Need Your Loving
+Four Tops	 - 	I Can't Help Myself (Sugar Pie, Honey Bunch)
+Four Tops	 - 	Standing In The Shadows Of Love
+Frankie Lymon & The Teenagers	 - 	Why Do Fools Fall In Love
+Freda Payne	 - 	Band Of Gold
+Funkadelic	 - 	One Nation Under A Groove
+George Jones	 - 	He Stopped Loving Her Today
+Gladys Knight & The Pips	 - 	Midnight Train To Georgia
+Glen Campbell	 - 	Wichita Lineman
+Glen Campbell	 - 	By The Time I Get To Phoenix
+Hank Williams	 - 	Your Cheatin' Heart
+Howlin' Wolf	 - 	Spoonful
+Howlin' Wolf	 - 	Smokestack Lightning
+Jackie Wilson	 - 	(Your Love Keeps Lifting Me) Higher And Higher
+Jackie Wilson	 - 	Lonely Teardrops
+Jackson Browne	 - 	Running On Empty
+James Brown	 - 	Papa's Got A Brand New Bag
+James Brown	 - 	It's A Man's Man's Man's World
+James Brown	 - 	Say It Loud -- I'm Black And I'm Proud
+James Taylor	 - 	Fire And Rain
+Jeff Buckley	 - 	Hallelujah
+Jefferson Airplane	 - 	Somebody To Love
+Jefferson Airplane	 - 	White Rabbit
+Jerry Butler	 - 	For Your Precious Love
+Jimi Hendrix	 - 	Foxey Lady
+Jimi Hendrix	 - 	Hey Joe
+Jimi Hendrix	 - 	Little Wing
+Jimmy Cliff	 - 	Many Rivers To Cross
+Jimmy Cliff	 - 	The Harder They Come
+John Lee Hooker	 - 	Boom Boom
+John Mellencamp	 - 	Pink Houses
+Johnny Cash	 - 	I Walk The Line
+Johnny Cash	 - 	Folsom Prison Blues
+Joni Mitchell	 - 	Both Sides, Now
+Joni Mitchell	 - 	Help Me
+Joni Mitchell	 - 	Free Man In Paris
+Joy Division	 - 	Love Will Tear Us Apart
+Labelle	 - 	Lady Marmalade
+LaVern Baker	 - 	Jim Dandy
+Led Zeppelin	 - 	Heartbreaker
+Led Zeppelin	 - 	Ramble On
+Little Richard	 - 	The Girl Can't Help It
+Little Richard	 - 	Keep A Knockin'
+Lloyd Price	 - 	Stagger Lee
+Lou Reed	 - 	Walk On The Wild Side
+Love	 - 	Alone Again Or
+Lynyrd Skynyrd	 - 	Free Bird
+Martha And The Vandellas	 - 	Nowhere To Run
+Mitch Ryder	 - 	Mitch Ryder:Devil With A Blue Dress On/Good Golly Miss Molly
+Mott The Hoople	 - 	All The Young Dudes
+Muddy Waters	 - 	Hoochie Coochie Man
+Muddy Waters	 - 	Got My Mojo Working
+Muddy Waters	 - 	Rollin' Stone
+N.W.A	 - 	Fuck Tha Police
+Neil Young	 - 	Rockin' In The Free World
+Neil Young	 - 	Heart Of Gold
+Neil Young	 - 	Cortez The Killer
+New York Dolls	 - 	Personality Crisis
+Norman Greenbaum	 - 	Spirit In The Sky
+Otis Redding	 - 	Try A Little Tenderness
+Parliament	 - 	Flash Light
+Patsy Cline	 - 	I Fall To Pieces
+Patti Smith	 - 	Dancing Barefoot
+Paul McCartney	 - 	Maybe I'm Amazed
+Paul Revere And The Raiders	 - 	Kicks
+Paul Simon	 - 	Graceland
+Pavement	 - 	Summer Babe
+Pink Floyd	 - 	Comfortably Numb
+Pixies	 - 	Monkey Gone To Heaven
+Please	 - 	Please
+Prince	 - 	Purple Rain
+Prince	 - 	1999
+Prince	 - 	Sign 'O' The Times
+Public Enemy	 - 	Bring The Noise
+Public Enemy	 - 	Fight The Power
+Question Mark And The Mysterians	 - 	96 Tears
+R.E.M.	 - 	Radio Free Europe
+Radiohead	 - 	Paranoid Android
+Radiohead	 - 	Fake Plastic Trees
+Ramones	 - 	Sheena Is A Punk Rocker
+Randy Newman	 - 	Sail Away
+Ray Charles	 - 	Ain't It A Shame
+Ray Charles	 - 	I Can't Stop Loving You
+Ray Charles	 - 	I Got A Woman
+Ritchie Valens	 - 	La Bamba
+Rod Stewart	 - 	Maggie May
+Roy Orbison	 - 	Crying
+Roy Orbison	 - 	Only The Lonely (Know How I Feel)
+Roy Orbison	 - 	In Dreams
+Salt-N-Pepa	 - 	Push It
+Sam & Dave	 - 	Soul Man
+Sam Cooke	 - 	You Send Me
+Sam Cooke	 - 	Wonderful World
+Sam Cooke	 - 	Cupid
+Screamin' Jay Hawkins	 - 	I Put A Spell On You
+Sex Pistols	 - 	God Save The Queen
+Sly & The Family Stone	 - 	Family Affair
+Sly & The Family Stone	 - 	Everyday People
+Sly & The Family Stone	 - 	Dance To The Music
+Sly & The Family Stone	 - 	Stand!
+Sly & The Family Stone	 - 	Hot Fun In The Summertime
+Sly & The Family Stone	 - 	Thank You (Falettinme Be Mice Elf Agin)
+Solomon Burke	 - 	Everybody Needs Somebody To Love
+Sonny & Cher	 - 	I Got You Babe
+Steppenwolf	 - 	Born To Be Wild
+Stevie Wonder	 - 	Living For The City
+Stevie Wonder	 - 	Higher Ground
+Stevie Wonder	 - 	You Are The Sunshine Of My Life
+Television	 - 	Marquee Moon
+The Allman Brothers Band	 - 	Whipping Post
+The Animals	 - 	House Of The Rising Sun
+The Animals	 - 	We Gotta Get Out Of This Place
+The Animals	 - 	Don't Let Me Be Misunderstood
+The Band	 - 	The Night They Drove Old Dixie Down
+The Beach Boys	 - 	God Only Knows
+The Beach Boys	 - 	California Girls
+The Beach Boys	 - 	Don't Worry Baby
+The Beach Boys	 - 	In My Room
+The Beach Boys	 - 	Caroline, No
+The Beach Boys	 - 	Sloop John B
+The Beatles	 - 	While My Guitar Gently Weeps
+The Beatles	 - 	I Saw Her Standing There
+The Beatles	 - 	Something
+The Beatles	 - 	Rain
+The Bobby Fuller Four	 - 	I Fought The Law
+The Box Tops	 - 	The Letter
+The Byrds	 - 	Eight Miles High
+The Byrds	 - 	I'll Feel A Whole Lot Better
+The Chantels	 - 	Maybe
+The Chiffons	 - 	One Fine Day
+The Chords	 - 	Sh-Boom
+The Clash	 - 	Train In Vain
+The Clash	 - 	Complete Control
+The Clash	 - 	White Man In Hammersmith Palais
+The Coasters	 - 	Young Blood
+The Crystals	 - 	Da Doo Ron Ron (When He Walked Me Home)
+The Crystals	 - 	He's A Rebel
+The Crystals	 - 	Then He Kissed Me
+The DelVikings	 - 	Come Go With Me
+The Dells	 - 	Oh, What A Night
+The Dixie Cups	 - 	Chapel Of Love
+The Doors	 - 	The End
+The Drifters	 - 	Save The Last Dance For Me
+The Drifters	 - 	There Goes My Baby
+The Drifters	 - 	Money Honey
+The Drifters	 - 	Under The Boardwalk
+The Everly Brothers	 - 	All I Have To Do Is Dream
+The Everly Brothers	 - 	Cathy's Clown
+The Everly Brothers	 - 	Bye Bye Love
+The Five Satins	 - 	In The Still Of The Nite
+The Flamingos	 - 	I Only Have Eyes For You
+The Isley Brothers	 - 	Shout (Parts 1 And 2)
+The Isley Brothers	 - 	That Lady (Part 1 And 2)
+The Isley Brothers	 - 	It's Your Thing
+The Jam	 - 	That's Entertainment
+The Jimi Hendrix Experience	 - 	The Wind Cries Mary
+The Kinks	 - 	Lola
+The Left Banke	 - 	Walk Away Renée
+The Lovin' Spoonful	 - 	Do You Believe In Magic?
+The Lovin' Spoonful	 - 	Summer In The City
+The Miracles	 - 	Ooo Baby Baby
+The Miracles	 - 	Shop Around
+The Modern Lovers	 - 	Roadrunner
+The Penguins	 - 	Earth Angel (Will You Be Mine)
+The Platters	 - 	The Great Pretender
+The Rascals	 - 	Good Lovin'
+The Righteous Brothers	 - 	You've Lost That Lovin' Feelin'
+The Rolling Stones	 - 	Honky Tonk Women
+The Rolling Stones	 - 	Jumpin' Jack Flash
+The Rolling Stones	 - 	Street Fighting Man
+The Rolling Stones	 - 	Ruby Tuesday
+The Rolling Stones	 - 	Wild Horses
+The Rolling Stones	 - 	Tumbling Dice
+The Rolling Stones	 - 	Beast Of Burden
+The Rolling Stones	 - 	Brown Sugar
+The Rolling Stones	 - 	Miss You
+The Ronettes	 - 	Walking In The Rain
+The ShangriLas	 - 	Remember (Walkin' In The Sand)
+The ShangriLas	 - 	Leader Of The Pack
+The Shirelles	 - 	Will You Love Me Tomorrow
+The Shirelles	 - 	Tonight's The Night
+The Smiths	 - 	William, It Was Really Nothing
+The Smiths	 - 	How Soon Is Now?
+The Spencer Davis Group	 - 	Gimme Some Lovin'
+The Staple Singers	 - 	I'll Take You There
+The Staple Singers	 - 	Respect Yourself
+The Stooges	 - 	I Wanna Be Your Dog
+The Stooges	 - 	Search And Destroy
+The Sugarhill Gang	 - 	Rapper's Delight
+The Supremes	 - 	Baby Love
+The Supremes	 - 	You Keep Me Hangin' On
+The Supremes	 - 	Where Did Our Love Go
+The Temptations	 - 	My Girl
+The Temptations	 - 	Papa Was A Rollin' Stone
+The Temptations	 - 	Just My Imagination
+The Troggs	 - 	Wild Thing
+The Velvet Underground	 - 	I'm Waiting For The Man
+The Velvet Underground	 - 	Heroin
+The Who	 - 	Won't Get Fooled Again
+The Who	 - 	I Can See For Miles
+The Who	 - 	Baba O'Riley
+The Who	 - 	I Can't Explain
+The Zombies	 - 	She's Not There
+Them	 - 	Gloria
+Thin Lizzy	 - 	The Boys Are Back In Town
+Tina Turner	 - 	What's Love Got To Do With It
+Tom Petty	 - 	Free Fallin'
+Toots & The Maytals	 - 	Pressure Drop
+Van Morrison	 - 	Moondance
+Van Morrison	 - 	Into The Mystic
+Willie Nelson	 - 	Blue Eyes Crying In The Rain
+Willie Nelson	 - 	On The Road Again
+Wilson Pickett	 - 	In The Midnight Hour
+Wilson Pickett	 - 	Mustang Sally
+
+Daniela Andrade
+
+------ faltan MUSICA
+
+mobali na ngai wana / la bollona - mbilia bel
+zangalewa / el militar - waka waka golden sounds
+awuthule kancane / la muhua - mahlathini and the mahotella queens 
+
+Trafassi - 1986 - 0 - El Giovanny Nro 1 (Halla Gulla Maza Hai Jawani)(Jagjit Singh)(Amit Kumar)Surinam)1 
+Trafassi - 1986 - 0 - El Giovanny Nro 2 (Dhai Din Na Jawani Naal Chaldi)(Jagjit Singh)(Punjabi)(Surinam)1
+
+https://gaana.com/lyrics/dhai-din-na-jawani-naal-chaldi
+
+O Dhai Din Na Jawani Naal Chaldi, Kurti Mal Mal Di,
+
+Aathri Teri Jawani Kudiye Tere Bas Na Raindi,
+
+Sade Dil Nu Na Bulawe Tere Haatha Di Mehandi,
+
+Ni Tu Sun Faby Lat Wango Kardi, Kurti Mal Mal Di,
+
+O Dhai Din Na Jawani Naal Chaldi, Kurti Mal Mal Di,
+
+Tere Kolo Turna Sikhe Panj Dariya De Pani,
+
+Ja Tu Koi Heer Saleti Ja Koi PhoolaN Rani,
+
+Ni Tu KudiyaN De Which Nayio Raldi, Kurti Mal Mal Di
+
+O Dhai Din Na Jawani Naal Chaldi, Kurti Mal Mal Di,
+
+Patli Kurti De WhichoN Di Roop JhatiyaN Mare,
+
+Aang Aang Tera Tapda Rainda, Lu Lu Kare Ishare,
+
+O Juti Khaldi MaroRa Nayio Chaldi, Kurti Mal Mal Di
+
+O Dhai Din Na Jawani Naal Chaldi, Kurti Mal Mal Di
+
+
+https://www.youtube.com/watch?v=9J7X_NlVH8Q
+
+https://www.youtube.com/watch?v=BUU1hLEOMN8
+
+
+
+Cerati falta
+Álbumes de estudio
+
+2006 - Siempre es hoy
+2009 - Fuerza natural
+
+Álbumes en vivo
+2007	Ahí Vamos Tour (live)
+
+Sencillos/EP
+Raíz (simple) (1999)
+Puente (simple) (1999)
+La Excepción (simple) (2006)
+
+Bandas sonoras
+Cóndor Crux (2000)
+Sólo por hoy (2001)
+
+
+------ 
+https://yoump3.tel/ 	 	
+
+
+
+Trafassi - 1986 - 0 - El Giovanny Nro 2 (Dhai Din Na Jawani Naal Chaldi)(Jagjit Singh)(Punjabi)(Surinam)
+https://www.youtube.com/watch?v=DmufP62R7Ps
+https://www.youtube.com/watch?v=kbEmlCH1fq8
+
+letra
+https://www.youtube.com/watch?v=4WM9olZxDoA
+
+Le llamamos "El Giovanni" para hacerlo fácil al oído y pegajoso. El nombre completo es DHAI DIN NA JAWANI NAAL CHALDI o "La camisa de lino". Me encanta una partecita que dice "tu camisa de lino es vieja comparada con tu juventud y belleza". De surinam o del holandés, lo cierto es que la base musical es árage e hindú y tiene una armonia insuperable
+
+---
+
+TRAFASSI GRUPO NACIDO EN EL PAIS DE SURINAME Y QUIEN INTERPRETO LAS FAMOSAS CANCIONES DEL GIOVANNI 1, GIOVANNI 2(Dhai Dhin Jawaanee), GIOVANNI 3 (CHITRA LOWE) Y LA GARRAPATA (Chaadar Bichauw Balama). su cantante era Edgar Bugru Afro-Suriname que actualmente sigue cantando. TODOS ESTOS EXITOS SON PROVENIENTE DE LA INDIA Y FUERON ADAPTADOS POR EL GRUPO TRAFASSI.
+MIRA TAMBIEN:
+
+Trafassi - 1986 - 0 - El Giovanny Nro 1 (Rem)(Halla Gulla Maza Hai Jawani)(India)(Jagjit Singh)(Amit Kumar)(Surinam)
+https://www.youtube.com/watch?v=a1h3df6iHho&t=0s
+
+
+---
+
+reemplazar los de joselito por originales
+
+Los 50 De Joselito -  Cabeza De Hacha.mp3
+Los 50 De Joselito -  Cinco Pa Las Doce.mp3
+Los 50 De Joselito -  Compae Heliodoro.mp3
+Los 50 De Joselito -  Dame Tu Mujer Jose.mp3
+Los 50 De Joselito -  El Aguacero.mp3
+Los 50 De Joselito -  El Ano Viejo.mp3
+Los 50 De Joselito -  El Bailador.mp3
+Los 50 De Joselito -  El Diario De Un Crudo.mp3
+Los 50 De Joselito -  El Huerfanito.mp3
+Los 50 De Joselito -  El Pajarito Amarillo.mp3
+Los 50 De Joselito -  El Ron De Vinola.mp3
+Los 50 De Joselito -  Festival En Guarare (La Banda Borracha).mp3
+Los 50 De Joselito -  Grito Vagabundo.mp3
+Los 50 De Joselito -  La Arana Picua.mp3
+Los 50 De Joselito -  La Pina Madura.mp3
+Los 50 De Joselito -  La Porra Caimanera.mp3
+Los 50 De Joselito -  La Vispera De Ano Nuevo.mp3
+Los 50 De Joselito -  Las Mujeres A Mi No Me Quieren.mp3
+Los 50 De Joselito -  Los Gotereros.mp3
+Los 50 De Joselito -  Maria Cristina.mp3
+Los 50 De Joselito -  Maria Teresa.mp3
+Los 50 De Joselito -  Que Lo Diga Ella.mp3
+
+ver gustavo quintero y rodolfo aicardy 
+https://es.wikipedia.org/wiki/Rodolfo_Aicardi
+
+Carlos Vives - 2022 - 0 - Baloncito Viejo (Ft Camilo)
+https://www.youtube.com/watch?v=sRcpcakGi-M
+
+Lucho Bermudez - 0 - 0 - Borrachera ver los años de lanzamiento de todas las canciones 
+Orquesta Fuentes - 0 - 0 - Borrachera (Lucho Bermudez)
+
+https://secondhandsongs.com/work/296011/all
+https://www.discogs.com/es/release/6043610-Various-La-M%C3%BAsica-De-Rafael-Hern%C3%A1ndez?srsltid=AfmBOooOPcg3NIHZK9BIIEPjPnyGpM7w36uwE3E6kCbpjyue6SMWh8pb
+
+Los Melódicos 1967
+
+A1		La Danza De La Chiva
+A2		Salsa Rumbero
+A3		El Peregrino
+A4		Brinca La Cuerda
+A5		Les Cornichons
+A6		Bombon De Canela
+B1		Matusalen
+B2		Pow Wow
+B3		A Santiago Voy
+B4		Palabras De Mujer
+B5		Valencia Me Llama
+B6		La Guayaba Colora
+
+Rodolfo  1979 
+
+Rodolfo* Con Los Hispanos–	Daniela	3:18
+Rodolfo Y Su Típica R.A.7*–	Tabaco y Ron	4:02
+Rodolfo* Con Los Hispanos–	Donde Estas Mariana	3:35
+Rodolfo* Con Los Hispanos–	El Abandonado	3:31
+Rodolfo* Con Los Hispanos–	El Preso	3:24
+Rodolfo* Con Los Hispanos–	La Cerveza	3:33
+Rodolfo Y Su Típica R.A.7*–	Cara, Carita	4:03
+Rodolfo* Con Los Hispanos–	Cariñito	3:47
+Rodolfo* Con Los Hispanos–	Botellita De Ron	2:58
+Rodolfo* Con Los Hispanos–	Pescador Triste	3:16
+Rodolfo* Con Los Hispanos–	Ay Mamá, Ay Papá	3:07
+Rodolfo* Con Los Hispanos–	La Bruja
+
+1975 Gildardo Montoya 
+
+A1		Dele Por Ai
+Written-By – Joaquín Bedoya
+A2		El Enterrador
+Written-By – José Muñoz (2)
+A3		Los Vaqueros Mentirosos
+Written-By – Joaquín Bedoya
+A4		Se Enfermo El Arruinao
+Written-By – Joaquín Bedoya
+A5		El Verracosky
+Written-By – José Muñoz (2)
+A6		Porque Te Quiero Te Aporrio'
+Written-By – José Muñoz (2)
+B1		Las Coplas Del Divorcio
+Written-By – José Muñoz (2)
+B2		El Profesor
+Written-By – Joaquín Bedoya
+B3		Carrataplan
+Written-By – José Muñoz (2)
+B4		El Transistor
+Written-By – José Muñoz (2)
+B5		Dijiste Que Diste
+Written-By – Joaquín Bedoya
+B6		El Barbudo
+Written-By – José Muñoz (2)
+
+1976 
+A1		El Astrologo
+A2		Sigalo Así
+A3		Los Doctores
+A4		El Curruñao
+A5		Las Paginas Amarillas
+B1		Los Apellidos
+B2		El Doctor Bobo
+B3		Trovas Misteriosas
+B4		Dos Mujeres
+B5		Llegue Borracho
+
+Irene Martinez y emilia herrera : quien canta que
+
+Falta Alfredo Gutierrez
+Falta Lisandro Mesa
+
+buscar versiones con (2)
+cambiar al ultimo lugar antes de version (Cv)
+
+Daft Punk - 2006 - Musique V1 - Da Funk
+Daft Punk - 2008 - 0 - Da Funk (Music)
+Daft Punk - 2005 - Live In Nyc - Da Funk (Ny)(Live)
+Daft Punk - 1996 - Da Funk (Cd Single) - Da Funk (Original)
+Daft Punk - 1995 - 0 - Da Funk (Queen)
+Daft Punk - 1996 - Da Funk (Cd Single) - Da Funk (Radio Edit)
+
+https://www.youtube.com/watch?v=mmi60Bd4jSs
+
+
+
+Boney M - 1978 - 0 - Rivers Of Babylon
+https://www.youtube.com/watch?v=jSxQJUv1e8k
+
+buscar original 
+Hootie And The Blowfish - 1994 - 0 - Time (V2)(Rem 2019)
+
+Johnny Cash - 1963 - 0 - Ring of Fire (V1)
+https://www.youtube.com/watch?v=5WyLhwYFgmk
+
+
+Social Distortion - 1990 - 0 - Ring of Fire (V2)(Cv Johnny Cash)
+https://www.youtube.com/watch?v=2BaksqH2YXQ
+
+
+buscar original año
+Enanitos Verdes - 1987 - Habitaciones Extranas - El Extrano Del Pelo Largo (V1)
+
+buscar original año
+Andres Calamaro - 1996 - Palabras Mas Palabras Menos (Los Rodriguez) - Mucho Mejor (Hace Calor)(V1)
+
+buscar original año
+Andres Calamaro - 2000 - 0 - Tuyo Siempre (Live)
+
+ver 
+Caifanes (Jaguares)
+
+
+Rodolfo aicardi  - 1981 - 0 -  Enamorado (Ft Hispanos)
+https://www.youtube.com/watch?v=N0O6tgOQdYg
+
+
+Jossie Esteban - 1991- 0 - Que Aha (Ft La Patrulla 15)
+https://www.youtube.com/watch?v=cI55h-D1Kng
+
+La makina - 1997 - 0 -  ayer te llame
+https://www.youtube.com/watch?v=blfiHW_sy_g
+
+Iván Villazón - 2021 - Que siga la fiesta - (Ft Cocha Molina)
+https://www.youtube.com/watch?v=5UeSaMCHc7M
+
+Chane Mesa - 1987 - 0 - las chiquillas 
+https://www.youtube.com/watch?v=kU9RzCUVq08
+
+los soneros de gamero - 1983 - 0 - mambaco
+https://www.youtube.com/watch?v=v1wNDCgdzqE
+
+Jossie Esteban - 1983 - 0 - Ay doctor
+https://www.youtube.com/watch?v=cg7pyBPSEwE
+
+Jossie Esteban - 1983 - 0 - Ay doctor original
+https://www.youtube.com/watch?v=eCh1StthV90
+
+
+Milly Quezada - -1983  Lo Mejor de Milly y los Vecinos Amanecemos / Lo Mio Es Mio
+https://www.youtube.com/watch?v=c5bS94wbKAA
+
+MILLY, JOCELYN Y LOS VECINOS - Lo Mio Es Mio (80's) 1983 
+https://www.youtube.com/watch?v=4HR-c9Dkqjs
+
+MILLY, JOCELYN Y LOS VECINOS - Lo Mio Es Mio (80's) 1983 
+https://www.youtube.com/watch?v=zjig32dSGbQ
+
+Gabino Pampini - 1998 - 0 - Mi Vecina
+https://www.youtube.com/watch?v=uCXfF4f1fHo&pp=ygUPI21pdmVjaW5hc3VtaWNv
+
+jossie esteban - 1992 - 0 - Pegando Pecho
+https://www.youtube.com/watch?v=CqJpqun8L_k
+
+Orquesta de la Luz - 1990 - 0 - Salsa caliente del Japón
+https://www.youtube.com/watch?v=gXdBszUca9o
+
+
+Sin Bandera buscar cd PASADO 
+Seré un buen perdedor 
+https://www.youtube.com/watch?v=uQ3T0SSANp4
+Si Tu No Estas
+https://www.youtube.com/watch?v=nwcRpWhJm-M
+Sin Bandera Feat Jovanotti - Serenata Rap 
+https://www.youtube.com/watch?v=f0oC-zGIsQg
+Será
+https://www.youtube.com/watch?v=pqvI-6NRN_A
+Si Tu No Vuelves
+https://www.youtube.com/watch?v=d-RBA5CG1Ag	
+
+
+
+buscar de nuevo 
+%comment% HAS "(x-"
+cancion cortada  
+ (x-cortado)
+mejorar el audio  
+ (x-audio)
+ (x-mas corta)
+ (x-malo) 
+ (x-no tiene min)
+
+
+-------- -------- --------  Audio Lab
+
+Separar voz e instrumentos de un mp3
+  Opción:
+    Herramientas de edición IA
+    AI Tallos Divisor
+      Seleccionar el mp3
+  Queda guardado en : Music /Audio:LAb / KARAOKE_AUDIO
+
+
+
+
+Tengo estos archivos de mp3:
+
+TITULO	CANTANTE	TASA DE BITS	FRECUENCIA	MODO	VBR/CBR
+Crazy For You	Madonna	192 kbit/s	44100 hz	Stereo	CBR
+1979 (audio)	Smashing Pumpkins	128 kbit/s	32000 hz	Join Stereo	CBR
+1979 (Acoustic)	Smashing Pumpkins	128 kbit/s	32000 hz	Join Stereo	CBR
+99 Luftballons	Nena	128 kbit/s	44100 hz	Stereo	CBR
+
+
+según estas características cual tiene mejor sonido?
+
+| Canción                     | Bitrate        | Frecuencia    | Calidad relativa |
+| --------------------------- | -------------- | ------------- | ---------------- |
+| **Crazy For You – Madonna** | **192 kbit/s** | **44.100 Hz** | ⭐ **Mejor**      |
+| 99 Luftballons – Nena       | 128 kbit/s     | 44.100 Hz     | Media            |
+| 1979 (audio)                | 128 kbit/s     | 32.000 Hz     | Más baja         |
+| 1979 (Acoustic)             | 128 kbit/s     | 32.000 Hz     | Más baja         |
+
+
+Tasa de bits (bitrate) - Mayor es mejor (calidad de compresión)
+Frecuencia de muestreo - Mayor es mejor (rango de frecuencias)
+Modo de audio - Stereo es mejor que Join Stereo
+Tipo de bitrate - CBR es más consistente que VBR
+
+
+como puedo encontrar el mp3 de la canción Crazy For You	de Madonna	con 	192	kbit/s 44100 Frecuency(Hz)	Mode Stereo	y en CBR	
+
+"Crazy for You" Madonna 192 kbps CBR
+"Crazy for You" Madonna MP3 192k
+Madonna "Crazy for You" CD quality
+
+
+$filename(csv,utf-16)Title;Artist;Size;kbit/s;Frecuency(Hz);Mode;VBR;Filename;
+$loop(%_filename_ext%)%title%;%artist%;%_file_size%;%_bitrate%;%_samplerate%;%_mode%;%_vbr%;%_filename_ext%
+$loopend()build on;%_date%;with %_app%;http://www.mp3tag.de/en/
